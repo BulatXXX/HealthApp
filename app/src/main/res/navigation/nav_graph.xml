@@ -105,5 +105,9 @@
         android:id="@+id/changeMedicineFragment"
         android:name="com.example.healt_app.medicine.ChangeMedicineFragment"
         android:label="fragment_change_medicine"
-        tools:layout="@layout/fragment_change_medicine" />
+        tools:layout="@layout/fragment_change_medicine" >
+        <argument
+            android:name="medicine"
+            app:argType="com.example.healt_app.medicine.medicineRecyclerView.Medicine" />
+    </fragment>
 </navigation>

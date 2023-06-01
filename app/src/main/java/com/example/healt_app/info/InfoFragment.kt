@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.example.healt_app.InfoFragmentDirections
+
 import com.example.healt_app.databinding.FragmentInfoBinding
 
 class InfoFragment : Fragment() {

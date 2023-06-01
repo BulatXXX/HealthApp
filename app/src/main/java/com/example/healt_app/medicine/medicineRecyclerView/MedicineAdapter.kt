@@ -2,21 +2,25 @@ package com.example.healt_app.medicine.medicineRecyclerView
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
 import com.example.healt_app.databinding.MedicineItemBinding
 
-class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
+class MedicineAdapter(val listener: Listener) : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
     private var medicineList = ArrayList<Medicine>()
 
     class MedicineHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = MedicineItemBinding.bind(item)
-        fun bind(medicine: Medicine) = with(binding) {
+        fun bind(medicine: Medicine, listener: Listener) = with(binding) {
             medicineName.text = medicine.name
             freq.text = medicine.frequency
             time.text = medicine.time
+            itemView.setOnClickListener {
+                listener.onClick(medicine)
+            }
         }
     }
 
@@ -31,12 +35,15 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
     }
 
     override fun onBindViewHolder(holder: MedicineHolder , position: Int) {
-        holder.bind(medicineList[position])
+        holder.bind(medicineList[position],listener)
     }
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(list: ArrayList<Medicine>) {
         this.medicineList = list
         notifyDataSetChanged()
+    }
+    interface Listener{
+        fun onClick(medicine: Medicine)
     }
 
 }

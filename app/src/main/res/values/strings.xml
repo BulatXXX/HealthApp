@@ -24,4 +24,11 @@
     <string name="login">Логин</string>
     <string name="registration">Регистрация</string>
     <string name="welcome">Здраствуйте!</string>
+    <string name="change">Изменить</string>
+    <string name="Changing">Изменение</string>
+    <string name="every_day">Каждый день</string>
+    <string name="once_every_two_days">Раз в два дня</string>
+    <string name="once_every_week">Раз в неделю</string>
+    <string name="three_times_in_a_day">Три раза в день</string>
+    <string name="twice_a_day">Два раза в день</string>
 </resources>
