@@ -1,5 +1,27 @@
 <resources>
     <string name="app_name">Healt_App</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="categories">Категории</string>
+    <string name="info">Информация</string>
+    <string name="height">Рост</string>
+    <string name="weight">Вес</string>
+    <string name="age">Возраст</string>
+    <string name="mass_index">Индекс массы тела</string>
+    <string name="deficite">Дефицит</string>
+    <string name="normal">Норма</string>
+    <string name="overweight">Избыточная МТ</string>
+    <string name="obesity_1_dg">Ожирение 1 степени</string>
+    <string name="obesity_2_dg">Ожирение 2 степени</string>
+    <string name="obesity_3_dg">Ожирение 3 степени</string>
+    <string name="mass_index_text">Индекс массы тела — величина, позволяющая оценить степень соответствия массы человека и его роста и тем самым косвенно судить о том, является ли масса недостаточной, нормальной или избыточной. Важен при определении показаний для необходимости лечения.</string>
+    <string name="save">Сохранить</string>
+    <string name="medicine">Препараты</string>
+    <string name="medicine_name">Название препарата</string>
+    <string name="add">Добавить</string>
+    <string name="appointment_creation">Создание записи</string>
+    <string name="log_in">Вход</string>
+    <string name="password">Пароль</string>
+    <string name="login">Логин</string>
+    <string name="registration">Регистрация</string>
+    <string name="welcome">Здраствуйте!</string>
 </resources>
