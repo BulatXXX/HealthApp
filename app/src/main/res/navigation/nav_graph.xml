@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/testFragment">
 
     <fragment
         android:id="@+id/homeScreenFragment"
@@ -110,4 +110,9 @@
             android:name="medicine"
             app:argType="com.example.healt_app.medicine.medicineRecyclerView.Medicine" />
     </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.example.healt_app.testUI.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 </navigation>

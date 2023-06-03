@@ -35,4 +35,6 @@
     <string name="deleting">Удаление</string>
     <string name="ok">ОК</string>
     <string name="cancel">Отмена</string>
+    <string name="name">Имя</string>
+    <string name="doctor">Врач</string>
 </resources>
