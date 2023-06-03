@@ -47,6 +47,7 @@ class MedicineFragment : Fragment(), MedicineAdapter.Listener {
             Navigation.findNavController(requireView()).navigate(action)
         }
 
+
     }
 
     private fun getMedicineList(){
@@ -55,7 +56,7 @@ class MedicineFragment : Fragment(), MedicineAdapter.Listener {
     }
     private fun getTestMedicineList(){
         for(i in 1..5){
-            medicineList.add(Medicine(i,"Витамин $i","Каждый день","${i+1}:00"))
+            medicineList.add(Medicine(i,"Витамин $i","Каждый день","0${i+1}:00"))
         }
 
     }

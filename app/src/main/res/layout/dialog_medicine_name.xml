@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:id="@+id/medicine_name"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/large_text_size"
@@ -21,7 +21,7 @@
         />
 
     <com.google.android.material.button.MaterialButton
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/save_btn"
         style="@style/Widget.Material3.Button"
         android:layout_width="wrap_content"

@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/doctorsFragment"
-        android:name="com.example.healt_app.DoctorsFragment"
+        android:name="com.example.healt_app.doctor_appointment.DoctorsFragment"
         android:label="fragment_doctors"
         tools:layout="@layout/fragment_doctors" />
     <fragment

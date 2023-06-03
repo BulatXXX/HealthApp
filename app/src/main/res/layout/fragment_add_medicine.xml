@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/heading_top_margin"
         android:fontFamily="@font/montserrat_semibold"
         android:singleLine="true"
-        android:text="@string/medicine"
+        android:text="@string/Changing"
         android:textColor="@color/black"
         android:textSize="@dimen/heading_text_size"
         app:layout_constraintStart_toStartOf="@id/medicineCard"
@@ -39,18 +39,9 @@
             android:layout_marginTop="@dimen/large_text_size"
             android:layout_marginBottom="@dimen/large_text_size"
             android:orientation="vertical">
-            <EditText
+            <TextView
                 android:id="@+id/medicine_name"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:fontFamily="@font/montserrat_semibold"
-                android:textSize="@dimen/large_text_size"
-                android:textColor="@color/black"
-                android:hint="@string/medicine_name"/>
-            <EditText
-                android:id="@+id/freq"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,16 +49,40 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
                 android:textColor="@color/black"
-                android:hint="Каждый день"/>
-            <EditText
+                android:text="@string/medicine_name"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/freq"
+                android:layout_marginTop="@dimen/small_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:textColor="@color/black"
+                android:text="Каждый день"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:layout_marginTop="@dimen/small_text_size"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
                 android:textColor="@color/black"
-                android:hint="00:00"/>
+                android:text="00:00"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
 
 

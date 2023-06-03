@@ -19,7 +19,7 @@ class InfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,6 +34,17 @@ class InfoFragment : Fragment() {
             val action = InfoFragmentDirections.actionInfoFragmentToMassIndexFragment()
             Navigation.findNavController(requireView()).navigate(action)
         }
+        initPersonalInfo()
+        countMassIndex()
+
+    }
+
+    private fun countMassIndex() {
+
+    }
+
+    private fun initPersonalInfo(){
+        //Get from DB
     }
 
 

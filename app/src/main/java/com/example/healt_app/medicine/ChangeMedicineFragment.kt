@@ -2,6 +2,7 @@ package com.example.healt_app.medicine
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,10 +25,6 @@ class ChangeMedicineFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
@@ -43,20 +40,19 @@ class ChangeMedicineFragment : Fragment() {
         val args: ChangeMedicineFragmentArgs by navArgs()
         val medicine = args.medicine
 
+
+
+
+        deleteBtnInit(medicine)
+
         binding.saveBtn.setOnClickListener {
             changeMedicine(medicine)
-        }
-        binding.deleteBtn.setOnClickListener {
-            deleteMedicine(medicine)
         }
         binding.medicineName.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             val dialog = builder.create()
             val layoutInflater = layoutInflater
             val dialogBinding = DialogMedicineNameBinding.inflate(layoutInflater)
-
-
-
 
             dialogBinding.saveBtn.setOnClickListener {
                 binding.medicineName.text = dialogBinding.medicineName.text
@@ -73,16 +69,18 @@ class ChangeMedicineFragment : Fragment() {
             val dialogBinding = DialogMedicineFrequencyPickerBinding.inflate(layoutInflater)
             dialogBinding.freqPicker.minValue = 0
             dialogBinding.freqPicker.maxValue = 4
-            val frequency = arrayOf(getString(R.string.three_times_in_a_day) ,
-                getString(R.string.twice_a_day),
-                getString(R.string.every_day),
-                getString(R.string.once_every_two_days),
+            val frequency = arrayOf(
+                getString(R.string.three_times_in_a_day) ,
+                getString(R.string.twice_a_day) ,
+                getString(R.string.every_day) ,
+                getString(R.string.once_every_two_days) ,
                 getString(R.string.once_every_week)
             )
             dialogBinding.freqPicker.displayedValues = frequency
+            dialogBinding.freqPicker.value = frequency.indexOf(binding.freq.text.toString())
 
             dialogBinding.saveBtn.setOnClickListener {
-                binding.freq.setText(frequency[dialogBinding.freqPicker.value])
+                binding.freq.text = frequency[dialogBinding.freqPicker.value]
                 dialog.dismiss()
             }
             dialog.setView(dialogBinding.root)
@@ -94,17 +92,62 @@ class ChangeMedicineFragment : Fragment() {
             val dialog = builder.create()
             val layoutInflater = layoutInflater
             val dialogBinding = DialogTimePickerBinding.inflate(layoutInflater)
-            val minutes = arrayOf("00","05","10","15","20","25","30","35","40","45","50","55")
+            val minutes = arrayOf(
+                "00" ,
+                "05" ,
+                "10" ,
+                "15" ,
+                "20" ,
+                "25" ,
+                "30" ,
+                "35" ,
+                "40" ,
+                "45" ,
+                "50" ,
+                "55"
+            )
             dialogBinding.minutesPicker.minValue = 0
             dialogBinding.minutesPicker.maxValue = 11
             dialogBinding.minutesPicker.displayedValues = minutes
-            val hours = arrayOf("00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23")
+            dialogBinding.minutesPicker.value =
+                minutes.indexOf(binding.time.text.toString().substring(3))
+
+            val hours = arrayOf(
+                "00" ,
+                "01" ,
+                "02" ,
+                "03" ,
+                "04" ,
+                "05" ,
+                "06" ,
+                "07" ,
+                "08" ,
+                "09" ,
+                "10" ,
+                "11" ,
+                "12" ,
+                "13" ,
+                "14" ,
+                "15" ,
+                "16" ,
+                "17" ,
+                "18" ,
+                "19" ,
+                "20" ,
+                "21" ,
+                "22" ,
+                "23"
+            )
 
             dialogBinding.hourPicker.minValue = 0
             dialogBinding.hourPicker.maxValue = 23
             dialogBinding.hourPicker.displayedValues = hours
+            dialogBinding.hourPicker.value =
+                hours.indexOf(binding.time.text.toString().substring(0 , 2))
+
             dialogBinding.saveBtn.setOnClickListener {
-                binding.time.setText(hours[dialogBinding.hourPicker.value]+":"+minutes[dialogBinding.minutesPicker.value])
+                binding.time.text =
+                    hours[dialogBinding.hourPicker.value] + ":" + minutes[dialogBinding.minutesPicker.value]
                 dialog.dismiss()
             }
             dialog.setView(dialogBinding.root)
@@ -112,10 +155,28 @@ class ChangeMedicineFragment : Fragment() {
         }
 
 
-        binding.medicineName.hint = medicine.name
-        binding.freq.hint = medicine.frequency
-        binding.time.hint = medicine.time
+        binding.medicineName.text = medicine.name
+        binding.freq.text = medicine.frequency
+        binding.time.text = medicine.time
 
+    }
+
+    private fun deleteBtnInit(medicine: Medicine) {
+        binding.deleteBtn.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle(R.string.deleting)
+
+            builder.setMessage(getString(R.string.delete_medicine_from_the_list_question))
+            builder.setPositiveButton(R.string.ok) { dialogInterface , _ ->
+                deleteMedicine(medicine)
+                Navigation.findNavController(requireView()).popBackStack()
+            }
+            builder.setNegativeButton(R.string.cancel) { dialogInterface , _ ->
+            }
+            val dialog = builder.create()
+            dialog.show()
+
+        }
     }
 
     private fun deleteMedicine(medicine: Medicine) {
@@ -140,10 +201,14 @@ class ChangeMedicineFragment : Fragment() {
 
         Toast.makeText(requireContext() , changedMedicine.toString() , Toast.LENGTH_LONG).show()
 
-        //Upload to DataBase
+        changedMedicineInDB(changedMedicine)
 
 
         Navigation.findNavController(requireView()).popBackStack()
+    }
+
+    private fun changedMedicineInDB(medicine: Medicine) {
+        //Upload to db
     }
 
 
