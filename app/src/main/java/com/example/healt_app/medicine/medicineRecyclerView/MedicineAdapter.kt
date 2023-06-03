@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
 import com.example.healt_app.databinding.MedicineItemBinding
 
-class MedicineAdapter(val listener: Listener) : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
+class MedicineAdapter(private val listener: Listener) : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
     private var medicineList = ArrayList<Medicine>()
 
     class MedicineHolder(item: View) : RecyclerView.ViewHolder(item) {

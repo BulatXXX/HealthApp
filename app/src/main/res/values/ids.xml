@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="enter_login" type="id">Введите логин</item>
+    <item name="enter_password" type="id">Введите пароль</item>
+    <item name="wrong_login_or_password" type="id">Неправильный логин или пароль</item>
+</resources>

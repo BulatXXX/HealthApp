@@ -1,5 +1,5 @@
 package com.example.healt_app.testUI
-
+/*
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,12 +14,13 @@ import com.example.healt_app.databinding.FragmentTestBinding
 import com.example.healt_app.testUI.testRecyclerView.TestUserAdapter
 
 
-class TestFragment : Fragment() {
+class TestFragment : Fragment() , TestUserAdapter.Listener {
 
     private var _binding: FragmentTestBinding? = null
     private val binding get() = _binding!!
     private val users = ArrayList<User>()
-    private val adapter = TestUserAdapter()
+    private val adapter = TestUserAdapter(this)
+    private var selectedUser: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -32,22 +33,42 @@ class TestFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+
         val db = MainDB.getDb(requireContext())
-        db.getDao().getUsers().asLiveData().observe(requireActivity()){ list ->
+
+        db.getDao().getUsers().asLiveData().observe(requireActivity()) { list ->
             users.clear()
-            list.forEach{
+            list.forEach {
                 users.add(it)
             }
             adapter.updateList(users)
             binding.rv.adapter = adapter
         }
+
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
         binding.rv.adapter = adapter
         binding.saveBtn.setOnClickListener {
-            val user = User(null , binding.nameEt.text.toString() , "00.00.00")
-            Thread { db.getDao().insertUser(user) }.start()
+         //   val user = User(null , binding.nameEt.text.toString() , "00.00.00")
+          //  Thread { db.getDao().insertUser(user) }.start()
 
         }
+        binding.deleteBtn.setOnClickListener {
+            Thread { selectedUser?.id?.let { user_id -> db.getDao().deleteUserById(user_id) } }.start()
+        }
+        binding.changeBtn.setOnClickListener {
+            val new_user = User(selectedUser?.id,binding.nameEt.text.toString(),"00")
+            Thread { db.getDao().updateUser(new_user) }.start()
+        }
+
     }
 
-}
+
+
+    override fun onClick(user: User) {
+        selectedUser = user
+        binding.userInfo.text = user.toString()
+
+    }
+
+
+}*/

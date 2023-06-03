@@ -13,8 +13,9 @@ abstract class MainDB : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext ,
                 MainDB::class.java ,
-                "health_app.db"
+                "health_app_test.db"
             ).build()
         }
+
     }
 }
