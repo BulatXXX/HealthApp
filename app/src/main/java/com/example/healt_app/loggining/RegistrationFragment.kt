@@ -33,27 +33,41 @@ class RegistrationFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
 
         val db = MainDB.getDb(requireContext())
 
         binding.registrationBtn.setOnClickListener {
-            if(
-              binding.logInEt.text.toString() != "" && binding.passwordEt.text.toString() != "" && binding.birthDayPicker.text.toString() != "" && binding.nameEt.text.toString() != ""
-            ){
-            //Adding User to DB
-            val user = User(null,binding.logInEt.text.toString(),binding.passwordEt.text.toString(),binding.nameEt.text.toString(),binding.birthDayPicker.text.toString(),binding.checkBox.isChecked)
-            db.getDao().insertUser(user)
+            if (
+                binding.logInEt.text.toString() != "" && binding.passwordEt.text.toString() != "" && binding.birthDayPicker.text.toString() != "" && binding.nameEt.text.toString() != ""
+            ) {
+                //Adding User to DB
+                val user = User(
+                    null ,
+                    binding.logInEt.text.toString() ,
+                    binding.passwordEt.text.toString() ,
+                    binding.nameEt.text.toString() ,
+                    binding.birthDayPicker.text.toString() ,
+                    binding.checkBox.isChecked
+                )
+                Thread { db.getDao().insertUser(user) }.start()
 
-            //Getting back to LoginFragment
-            Toast.makeText(requireContext(), R.string.successfully_registred,Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(requireView()).popBackStack()
-            }
-            else{
-                var toast = Toast.makeText(requireContext(), R.string.enter_missing_info,Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER,0,0)
+
+                //Getting back to LoginFragment
+                Toast.makeText(
+                    requireContext() ,
+                    R.string.successfully_registred ,
+                    Toast.LENGTH_SHORT
+                ).show()
+                Navigation.findNavController(requireView()).popBackStack()
+            } else {
+                var toast = Toast.makeText(
+                    requireContext() ,
+                    R.string.enter_missing_info ,
+                    Toast.LENGTH_SHORT
+                )
+                toast.setGravity(Gravity.CENTER , 0 , 0)
                 toast.show()
 
             }

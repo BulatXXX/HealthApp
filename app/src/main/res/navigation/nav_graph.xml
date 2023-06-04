@@ -16,16 +16,15 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
-        <argument
-            android:name="myArg"
-            app:argType="string"
-            android:defaultValue="1" />
         <action
             android:id="@+id/action_homeScreenFragment_to_doctorsFragment"
             app:destination="@id/doctorsFragment" />
         <action
             android:id="@+id/action_homeScreenFragment_to_medicineFragment"
             app:destination="@id/medicineFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
@@ -43,6 +42,14 @@
         <action
             android:id="@+id/action_infoFragment_to_massIndexFragment"
             app:destination="@id/massIndexFragment" />
+        <action
+            android:id="@+id/action_infoFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="user"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/doctorsFragment"
@@ -75,6 +82,9 @@
         <action
             android:id="@+id/action_logInFragment_to_homeDoctorFragment"
             app:destination="@id/homeDoctorFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_testFragment"
+            app:destination="@id/testFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -90,7 +100,11 @@
         android:id="@+id/changeInfoFragment"
         android:name="com.example.healt_app.info.ChangeInfoFragment"
         android:label="fragment_change_info"
-        tools:layout="@layout/fragment_change_info" />
+        tools:layout="@layout/fragment_change_info" >
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/addMedicineFragment"
         android:name="com.example.healt_app.medicine.AddMedicineFragment"

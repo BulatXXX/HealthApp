@@ -49,14 +49,23 @@
                 android:textColor="@color/black"
                 android:hint="Name"/>
             <EditText
-                android:id="@+id/surname_EditText"
+                android:id="@+id/login_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
                 android:textColor="@color/black"
-                android:hint="Surname"/>
+                android:hint="Login"/>
+            <EditText
+                android:id="@+id/password_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:textColor="@color/black"
+                android:hint="@string/password"/>
             <EditText
                 android:id="@+id/birthDate_EditText"
                 android:layout_width="match_parent"

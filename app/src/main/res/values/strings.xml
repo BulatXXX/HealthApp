@@ -39,4 +39,8 @@
     <string name="doctor">Врач</string>
     <string name="successfully_registred">Регистрация успешна</string>
     <string name="enter_missing_info">Введите недостающую информацию</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="wrong_login_or_password">Неправильный логин или пароль</string>
+    <string name="changed">Изменено</string>
 </resources>

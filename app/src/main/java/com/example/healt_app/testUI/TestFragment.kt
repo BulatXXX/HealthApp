@@ -1,5 +1,5 @@
 package com.example.healt_app.testUI
-/*
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -55,10 +55,7 @@ class TestFragment : Fragment() , TestUserAdapter.Listener {
         binding.deleteBtn.setOnClickListener {
             Thread { selectedUser?.id?.let { user_id -> db.getDao().deleteUserById(user_id) } }.start()
         }
-        binding.changeBtn.setOnClickListener {
-            val new_user = User(selectedUser?.id,binding.nameEt.text.toString(),"00")
-            Thread { db.getDao().updateUser(new_user) }.start()
-        }
+
 
     }
 
@@ -71,4 +68,4 @@ class TestFragment : Fragment() , TestUserAdapter.Listener {
     }
 
 
-}*/
+}

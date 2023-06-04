@@ -1,15 +1,20 @@
 package com.example.healt_app.loggining
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
+import com.example.healt_app.R
 
 import com.example.healt_app.dataBase.MainDB
+import com.example.healt_app.dataBase.User
 import com.example.healt_app.loggining.LogInFragmentDirections
 import com.example.healt_app.databinding.FragmentLogInBinding
 
@@ -20,6 +25,7 @@ class LogInFragment : Fragment() {
     private var _binding: FragmentLogInBinding? = null
     private val binding get() = _binding!!
 
+    var user: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -35,25 +41,45 @@ class LogInFragment : Fragment() {
         super.onViewCreated(view , savedInstanceState)
         val toast: Toast = Toast.makeText(requireContext() , "Logged" , Toast.LENGTH_SHORT)
         val db = MainDB.getDb(requireContext())
-        binding.logInBtn.setOnClickListener {
-            var id : Int? = null
-            Thread{id = db.getDao()
-                .getUserId(binding.logInEt.text.toString() , binding.passwordEt.text.toString())}.start()
-
-            if(id != null){
-                val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment()
+        val sharedPref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
+        val id = sharedPref.getInt("ID",-1)
+        if(id != -1){
+            db.getDao().getUserByID(id).asLiveData().observe(requireActivity()){
+                val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
                 Navigation.findNavController(requireView()).navigate(action)
             }
-            if(id == null){
-                if(binding.logInEt.text.toString().isEmpty()){
-                   // Toast.makeText(requireContext(), R.id.enter_login,Toast.LENGTH_SHORT).show()
+        }
+        binding.logInBtn.setOnClickListener {
+            var id : Int? = null
+            val login = binding.logInEt.text.toString()
+            val password = binding.passwordEt.text.toString()
+
+
+
+
+            db.getDao().getUser(login,password).asLiveData().observe(requireActivity()){
+                if(it != null){
+                    val sPref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
+                    val ed = sPref.edit()
+                    it.id?.let { it1 -> ed.putInt("ID", it1) }
+                    ed.commit()
+                    val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
+                    Navigation.findNavController(requireView()).navigate(action)
                 }
-                else if (binding.passwordEt.text.toString().isEmpty()){
-                    //Toast.makeText(requireContext(), R.id.enter_password,Toast.LENGTH_SHORT).show()
-                }else{
-                    //Toast.makeText(requireContext(), R.id.wrong_login_or_password,Toast.LENGTH_SHORT).show()
+                else{
+                    if(binding.logInEt.text.toString().isEmpty()){
+                        Toast.makeText(requireContext(), R.string.enter_login,Toast.LENGTH_SHORT).show()
+                    }
+                    else if (binding.passwordEt.text.toString().isEmpty()){
+                        Toast.makeText(requireContext(), R.string.enter_password,Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(requireContext(), R.string.wrong_login_or_password,Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+
+
+
 
         }
 
@@ -63,7 +89,12 @@ class LogInFragment : Fragment() {
         }
         toast.show()
 
-    }
+        binding.welcome.setOnClickListener {
+            val action = LogInFragmentDirections.actionLogInFragmentToTestFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
 
+
+    }
 
 }

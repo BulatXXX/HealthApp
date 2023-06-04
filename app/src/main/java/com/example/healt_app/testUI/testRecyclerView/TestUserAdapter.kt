@@ -16,10 +16,11 @@ class TestUserAdapter(private val listener: Listener): RecyclerView.Adapter<Test
 
     class TestUserHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(user: User,listener:Listener){
+        @SuppressLint("SetTextI18n")
+        fun bind(user: User , listener:Listener){
             val binding = TestUserCardBinding.bind(itemView)
             binding.idUser.text = user.id.toString()
-            binding.name.text = user.login
+            binding.name.text = "${user.name} ${user.login} ${user.password}"
             itemView.setOnClickListener {
                 listener.onClick(user)
             }

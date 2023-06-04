@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.healt_app.databinding.FragmentHomeScreenBinding
 
 
@@ -17,6 +18,8 @@ class HomeScreenFragment : Fragment() {
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -29,6 +32,10 @@ class HomeScreenFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
+
+        val args : HomeScreenFragmentArgs by navArgs()
+        val user = args.user
+
         val animationDrawable = binding.homeScreenFragment.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
@@ -38,7 +45,7 @@ class HomeScreenFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.infoCardView.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToInfoFragment()
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToInfoFragment(user)
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.doctorsAppointmentCardView.setOnClickListener {

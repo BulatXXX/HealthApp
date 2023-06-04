@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.asLiveData
+import androidx.navigation.NavArgs
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.healt_app.R
+import com.example.healt_app.dataBase.MainDB
+import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.FragmentChangeInfoBinding
 
 
@@ -26,6 +33,34 @@ class ChangeInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+        val args : ChangeInfoFragmentArgs by navArgs()
+        val db = MainDB.getDb(requireContext())
+        db.getDao().getUserByID(args.userId).asLiveData().observe(requireActivity()){
+            with(binding){
+                nameEditText.hint = it.name
+                birthDateEditText.hint = it.birthDate
+                loginEditText.hint = it.login
+                passwordEditText.hint = it.password
+                weightEditText.hint = it.weight.toString()
+                heightEditText.hint = it.height.toString()
+
+            }
+        }
+        binding.saveBtn.setOnClickListener {
+
+            with(binding){
+                val name = if(nameEditText.text.toString().isEmpty())nameEditText.hint else{nameEditText.text}
+                val login = if(loginEditText.text.toString().isEmpty())loginEditText.hint else{loginEditText.text}
+                val password = if(passwordEditText.text.toString().isEmpty())passwordEditText.hint else{passwordEditText.text}
+                val birthday = if(birthDateEditText.text.toString().isEmpty())birthDateEditText.hint else{birthDateEditText.text}
+                val weight = if(weightEditText.text.toString().isEmpty())weightEditText.hint else{weightEditText.text}
+                val height = if(heightEditText.text.toString().isEmpty())heightEditText.hint else{heightEditText.text}
+                val user = User(args.userId, login.toString(),password.toString(),name.toString(), birthday.toString(), roll = false, post = null,weight.toString().toDouble(),height.toString().toInt())
+                Thread{db.getDao().updateUser(user)}.start()
+                Navigation.findNavController(requireView()).popBackStack()
+                Toast.makeText(requireContext(),R.string.changed,Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
