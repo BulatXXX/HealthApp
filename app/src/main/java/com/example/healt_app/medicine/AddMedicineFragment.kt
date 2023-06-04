@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.healt_app.R
+import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.DialogMedicineFrequencyPickerBinding
 import com.example.healt_app.databinding.DialogMedicineNameBinding
 import com.example.healt_app.databinding.DialogTimePickerBinding
 import com.example.healt_app.databinding.FragmentAddMedicineBinding
-import com.example.healt_app.medicine.medicineRecyclerView.Medicine
+import com.example.healt_app.dataBase.Medicine
 
 
 class AddMedicineFragment : Fragment() {
@@ -20,6 +22,7 @@ class AddMedicineFragment : Fragment() {
     private var _binding : FragmentAddMedicineBinding? = null
 
     private val binding get() = _binding!!
+    private val args: AddMedicineFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
@@ -136,15 +139,17 @@ class AddMedicineFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
             val name = binding.medicineName.text.toString()
             val freq = binding.freq.text.toString()
-            val time = binding.time.toString()
-            val medicine = Medicine(0,name,freq,time)       //Don't know how to use id
+            val time = binding.time.text.toString()
+            val medicine = Medicine(null,name,freq,time,args.userId)       //Don't know how to use id
             addMedicine(medicine)
             Navigation.findNavController(requireView()).popBackStack()
         }
     }
 
     private fun addMedicine(medicine: Medicine) {
-        //Uploading into DataBase
+        Thread{
+          MainDB.getDb(requireContext()).getDao().insertMedicine(medicine)
+        }.start()
     }
 
 }

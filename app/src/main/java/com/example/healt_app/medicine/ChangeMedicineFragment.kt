@@ -2,27 +2,29 @@ package com.example.healt_app.medicine
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.healt_app.R
+import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.DialogMedicineFrequencyPickerBinding
 import com.example.healt_app.databinding.DialogMedicineNameBinding
 import com.example.healt_app.databinding.DialogTimePickerBinding
 import com.example.healt_app.databinding.FragmentChangeMedicineBinding
-import com.example.healt_app.medicine.medicineRecyclerView.Medicine
+import com.example.healt_app.dataBase.Medicine
 
 
 class ChangeMedicineFragment : Fragment() {
 
     private var _binding: FragmentChangeMedicineBinding? = null
     private val binding get() = _binding!!
+    private val args: ChangeMedicineFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -154,10 +156,15 @@ class ChangeMedicineFragment : Fragment() {
             dialog.show()
         }
 
+        medicine.id?.let {
+            MainDB.getDb(requireContext()).getDao().getMedicineByID(medicine.id).asLiveData()
+                .observe(requireActivity()) { med ->
+                    binding.medicineName.text = med.name
+                    binding.freq.text = med.frequency
+                    binding.time.text = med.time
+                }
+        }
 
-        binding.medicineName.text = medicine.name
-        binding.freq.text = medicine.frequency
-        binding.time.text = medicine.time
 
     }
 
@@ -180,7 +187,9 @@ class ChangeMedicineFragment : Fragment() {
     }
 
     private fun deleteMedicine(medicine: Medicine) {
-        //Delete from dataBase
+        Thread {
+            medicine.id?.let { MainDB.getDb(requireContext()).getDao().deleteMedicineById(it) }
+        }.start()
     }
 
     private fun changeMedicine(medicine: Medicine) {
@@ -197,7 +206,8 @@ class ChangeMedicineFragment : Fragment() {
         if (time == "") {
             time = medicine.time
         }
-        val changedMedicine = Medicine(medicine.id , name , freq , time)
+        val changedMedicine = Medicine(medicine.id , name , freq , time , args.userId)
+
 
         Toast.makeText(requireContext() , changedMedicine.toString() , Toast.LENGTH_LONG).show()
 
@@ -208,7 +218,9 @@ class ChangeMedicineFragment : Fragment() {
     }
 
     private fun changedMedicineInDB(medicine: Medicine) {
-        //Upload to db
+        Thread {
+            MainDB.getDb(requireContext()).getDao().updateMedicine(medicine)
+        }.start()
     }
 
 

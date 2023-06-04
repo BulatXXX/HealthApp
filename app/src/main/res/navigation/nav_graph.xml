@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_medicineFragment_to_changeMedicineFragment"
             app:destination="@id/changeMedicineFragment" />
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -109,7 +112,11 @@
         android:id="@+id/addMedicineFragment"
         android:name="com.example.healt_app.medicine.AddMedicineFragment"
         android:label="fragment_add_medicine"
-        tools:layout="@layout/fragment_add_medicine" />
+        tools:layout="@layout/fragment_add_medicine" >
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/massIndexFragment"
         android:name="com.example.healt_app.info.MassIndexFragment"
@@ -122,7 +129,10 @@
         tools:layout="@layout/fragment_change_medicine" >
         <argument
             android:name="medicine"
-            app:argType="com.example.healt_app.medicine.medicineRecyclerView.Medicine" />
+            app:argType="com.example.healt_app.dataBase.Medicine" />
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/testFragment"

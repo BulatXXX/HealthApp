@@ -45,7 +45,7 @@ class LogInFragment : Fragment() {
         val id = sharedPref.getInt("ID",-1)
         if(id != -1){
             db.getDao().getUserByID(id).asLiveData().observe(requireActivity()){
-                val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
+               val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
                 Navigation.findNavController(requireView()).navigate(action)
             }
         }

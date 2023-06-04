@@ -1,20 +1,35 @@
-package com.example.healt_app.medicine.medicineRecyclerView
+package com.example.healt_app.dataBase
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-
-data class Medicine(val id :Int,val name: String, val frequency: String, val time: String): Parcelable{
+@Entity(tableName = "medicine")
+data class Medicine(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
+    @ColumnInfo(name = "medicine_name")
+    val name: String ,
+    @ColumnInfo(name = "freq")
+    val frequency: String ,
+    @ColumnInfo(name = "mtime")
+    val time: String ,
+    @ColumnInfo(name = "patientId")
+    val patientId: Int
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt() ,
         parcel.readString().toString() ,
         parcel.readString().toString() ,
-        parcel.readString().toString()
+        parcel.readString().toString() ,
+        parcel.readInt()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel , flags: Int) {
-        parcel.writeInt(id)
+        id?.let { parcel.writeInt(it) }
         parcel.writeString(name)
         parcel.writeString(frequency)
         parcel.writeString(time)

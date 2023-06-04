@@ -53,8 +53,8 @@ class HomeScreenFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.medicineCardView.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToMedicineFragment()
-            Navigation.findNavController(requireView()).navigate(action)
+            val action = user.id?.let { it1 -> HomeScreenFragmentDirections.actionHomeScreenFragmentToMedicineFragment(userId = it1) }
+            action?.let { it1 -> Navigation.findNavController(requireView()).navigate(it1) }
         }
 
         super.onViewCreated(view , savedInstanceState)

@@ -43,4 +43,5 @@
     <string name="enter_password">Введите пароль</string>
     <string name="wrong_login_or_password">Неправильный логин или пароль</string>
     <string name="changed">Изменено</string>
+    <string name="wrong_birth_date">Неправильно введена дата рождения</string>
 </resources>

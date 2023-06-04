@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
 import com.example.healt_app.databinding.DoctorsAppointmentItemBinding
-import com.example.healt_app.medicine.medicineRecyclerView.Medicine
 
 class DoctorAppointmentAdapter: RecyclerView.Adapter<DoctorAppointmentAdapter.DoctorAppointmentHolder>() {
     private var doctorAppointmentList = ArrayList<DoctorAppointment>()

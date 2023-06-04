@@ -36,6 +36,25 @@ interface Dao {
     @Query("SELECT * FROM users WHERE login = :login ")
     fun getUser(login: String): Flow<User>
 
+    /**
+     * Medicine
+     */
+    @Insert
+    fun insertMedicine(medicine: Medicine)
+
+    @Query("DELETE FROM medicine WHERE id = :id")
+    fun deleteMedicineById(id: Int)
+
+    @Query("SELECT * FROM medicine WHERE id = :id")
+    fun getMedicineByID(id : Int) : Flow<Medicine>
+    @Query("SELECT * FROM medicine WHERE patientId = :patientId")
+    fun getMedicineByPatientId(patientId: Int): Flow<List<Medicine>>
+
+    @Update
+    fun updateMedicine(medicine: Medicine)
+
+
+
 
 
 

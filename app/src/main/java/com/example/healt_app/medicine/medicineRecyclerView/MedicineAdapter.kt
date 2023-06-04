@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
+import com.example.healt_app.dataBase.Medicine
 import com.example.healt_app.databinding.MedicineItemBinding
 
 class MedicineAdapter(private val listener: Listener) : RecyclerView.Adapter<MedicineAdapter.MedicineHolder>() {
@@ -14,7 +15,7 @@ class MedicineAdapter(private val listener: Listener) : RecyclerView.Adapter<Med
 
     class MedicineHolder(item: View) : RecyclerView.ViewHolder(item) {
         val binding = MedicineItemBinding.bind(item)
-        fun bind(medicine: Medicine, listener: Listener) = with(binding) {
+        fun bind(medicine: Medicine , listener: Listener) = with(binding) {
             medicineName.text = medicine.name
             freq.text = medicine.frequency
             time.text = medicine.time

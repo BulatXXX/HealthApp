@@ -121,7 +121,9 @@ class InfoFragment : Fragment() {
                 )
             }
         }
-        binding.massIndexResult.text = getMassIndexResult()
+        binding.massIndexResult.text = if (height != 0 && weight !=0.0) getMassIndexResult() else {
+            "N/d"
+        }
 
     }
 
@@ -152,8 +154,9 @@ class InfoFragment : Fragment() {
             return getString(R.string.obesity_3_dg)
 
         }
-        return "Норма"
+
     }
+
 
 
 }

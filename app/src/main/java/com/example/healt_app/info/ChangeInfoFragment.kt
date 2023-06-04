@@ -49,6 +49,7 @@ class ChangeInfoFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
 
             with(binding){
+                if(isValidDate(birthDateEditText.text.toString())){
                 val name = if(nameEditText.text.toString().isEmpty())nameEditText.hint else{nameEditText.text}
                 val login = if(loginEditText.text.toString().isEmpty())loginEditText.hint else{loginEditText.text}
                 val password = if(passwordEditText.text.toString().isEmpty())passwordEditText.hint else{passwordEditText.text}
@@ -59,9 +60,17 @@ class ChangeInfoFragment : Fragment() {
                 Thread{db.getDao().updateUser(user)}.start()
                 Navigation.findNavController(requireView()).popBackStack()
                 Toast.makeText(requireContext(),R.string.changed,Toast.LENGTH_SHORT).show()
+                }else
+                {
+                    Toast.makeText(requireContext(),R.string.wrong_birth_date,Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
+    }
+    fun isValidDate(date: String): Boolean {
+        val pattern = "^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\\d{4}\$"
+        return pattern.toRegex().matches(date)
     }
 
 

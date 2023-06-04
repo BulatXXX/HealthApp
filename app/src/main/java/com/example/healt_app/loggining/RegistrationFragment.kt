@@ -40,7 +40,7 @@ class RegistrationFragment : Fragment() {
 
         binding.registrationBtn.setOnClickListener {
             if (
-                binding.logInEt.text.toString() != "" && binding.passwordEt.text.toString() != "" && binding.birthDayPicker.text.toString() != "" && binding.nameEt.text.toString() != ""
+                binding.logInEt.text.toString() != "" && binding.passwordEt.text.toString() != "" && binding.birthDayPicker.text.toString() != "" && binding.nameEt.text.toString() != "" && isValidDate(binding.birthDayPicker.text.toString())
             ) {
                 //Adding User to DB
                 val user = User(
@@ -61,7 +61,16 @@ class RegistrationFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 Navigation.findNavController(requireView()).popBackStack()
-            } else {
+            }
+            else if(!isValidDate(binding.birthDayPicker.text.toString())){
+                var toast = Toast.makeText(
+                    requireContext() ,
+                    "R.string. ",
+                    Toast.LENGTH_SHORT
+                )
+                toast.setGravity(Gravity.CENTER , 0 , 0)
+                toast.show()
+            }else {
                 var toast = Toast.makeText(
                     requireContext() ,
                     R.string.enter_missing_info ,
@@ -76,6 +85,10 @@ class RegistrationFragment : Fragment() {
         var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
         val date = LocalDate.now().format(formatter)
         binding.birthDayPicker.hint = date.toString()*/
+    }
+    fun isValidDate(date: String): Boolean {
+        val pattern = "^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\\d{4}\$"
+        return pattern.toRegex().matches(date)
     }
 
 
