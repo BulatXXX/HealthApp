@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="com.example.healt_app.HomeScreenFragment"
+        android:name="com.example.healt_app.roll_patient.HomeScreenFragment"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" >
         <action
@@ -25,15 +25,18 @@
         <argument
             android:name="user"
             app:argType="com.example.healt_app.dataBase.User" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_changeInfoFragment"
+            app:destination="@id/changeInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
-        android:name="com.example.healt_app.CategoriesFragment"
+        android:name="com.example.healt_app.roll_patient.DiseasesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.healt_app.info.InfoFragment"
+        android:name="com.example.healt_app.roll_patient.info.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
         <action
@@ -53,12 +56,12 @@
     </fragment>
     <fragment
         android:id="@+id/doctorsFragment"
-        android:name="com.example.healt_app.doctor_appointment.DoctorsFragment"
+        android:name="com.example.healt_app.roll_patient.doctor_appointment.DoctorsFragment"
         android:label="fragment_doctors"
         tools:layout="@layout/fragment_doctors" />
     <fragment
         android:id="@+id/medicineFragment"
-        android:name="com.example.healt_app.medicine.MedicineFragment"
+        android:name="com.example.healt_app.roll_patient.medicine.MedicineFragment"
         android:label="fragment_medicine"
         tools:layout="@layout/fragment_medicine" >
         <action
@@ -96,12 +99,25 @@
         tools:layout="@layout/fragment_registration" />
     <fragment
         android:id="@+id/homeDoctorFragment"
-        android:name="com.example.healt_app.HomeDoctorFragment"
+        android:name="com.example.healt_app.roll_doctor.HomeDoctorFragment"
         android:label="fragment_home_doctor"
-        tools:layout="@layout/fragment_home_doctor" />
+        tools:layout="@layout/fragment_home_doctor" >
+        <action
+            android:id="@+id/action_homeDoctorFragment_to_appointsmentsFragment"
+            app:destination="@id/appointsmentsFragment" />
+        <action
+            android:id="@+id/action_homeDoctorFragment_to_patientsFragment"
+            app:destination="@id/patientsFragment" />
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_homeDoctorFragment_to_doctorInfoFragment"
+            app:destination="@id/doctorInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changeInfoFragment"
-        android:name="com.example.healt_app.info.ChangeInfoFragment"
+        android:name="com.example.healt_app.roll_patient.info.ChangeInfoFragment"
         android:label="fragment_change_info"
         tools:layout="@layout/fragment_change_info" >
         <argument
@@ -110,7 +126,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMedicineFragment"
-        android:name="com.example.healt_app.medicine.AddMedicineFragment"
+        android:name="com.example.healt_app.roll_patient.medicine.AddMedicineFragment"
         android:label="fragment_add_medicine"
         tools:layout="@layout/fragment_add_medicine" >
         <argument
@@ -119,12 +135,12 @@
     </fragment>
     <fragment
         android:id="@+id/massIndexFragment"
-        android:name="com.example.healt_app.info.MassIndexFragment"
+        android:name="com.example.healt_app.roll_patient.info.MassIndexFragment"
         android:label="fragment_mass_index"
         tools:layout="@layout/fragment_mass_index" />
     <fragment
         android:id="@+id/changeMedicineFragment"
-        android:name="com.example.healt_app.medicine.ChangeMedicineFragment"
+        android:name="com.example.healt_app.roll_patient.medicine.ChangeMedicineFragment"
         android:label="fragment_change_medicine"
         tools:layout="@layout/fragment_change_medicine" >
         <argument
@@ -139,4 +155,120 @@
         android:name="com.example.healt_app.testUI.TestFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/appointsmentsFragment"
+        android:name="com.example.healt_app.roll_doctor.appointsment.AppointsmentsFragment"
+        android:label="fragment_appointsments"
+        tools:layout="@layout/fragment_appointsments" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_appointsmentsFragment_to_choosingPatientFragment"
+            app:destination="@id/choosingPatientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createDoctorAppointmentFragment"
+        android:name="com.example.healt_app.roll_doctor.appointsment.CreateDoctorAppointmentFragment"
+        android:label="fragment_create_doctor_appointment"
+        tools:layout="@layout/fragment_create_doctor_appointment" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientsFragment"
+        android:name="com.example.healt_app.roll_doctor.PatientsFragment"
+        android:label="fragment_patients"
+        tools:layout="@layout/fragment_patients" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_patientsFragment_to_diseasesFragment2"
+            app:destination="@id/doctorDiseasesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDiseaseFragment"
+        android:name="com.example.healt_app.roll_doctor.disease.AddDiseaseFragment"
+        android:label="fragment_add_disease"
+        tools:layout="@layout/fragment_add_disease" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <argument
+            android:name="patient_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeDiseaseFragment"
+        android:name="com.example.healt_app.roll_doctor.disease.ChangeDiseaseFragment"
+        android:label="fragment_change_disease"
+        tools:layout="@layout/fragment_change_disease" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <argument
+            android:name="patient_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorDiseasesFragment"
+        android:name="com.example.healt_app.roll_doctor.disease.DoctorDiseasesFragment"
+        android:label="fragment_diseses"
+        tools:layout="@layout/fragment_diseses" >
+        <action
+            android:id="@+id/action_diseasesFragment2_to_changeDiseaseFragment"
+            app:destination="@id/changeDiseaseFragment" />
+        <action
+            android:id="@+id/action_diseasesFragment2_to_addDiseaseFragment"
+            app:destination="@id/addDiseaseFragment" />
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <argument
+            android:name="patient_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorInfoFragment"
+        android:name="com.example.healt_app.roll_doctor.doctor_info.DoctorInfoFragment"
+        android:label="fragment_doctor_info"
+        tools:layout="@layout/fragment_doctor_info" >
+        <action
+            android:id="@+id/action_doctorInfoFragment_to_changeDoctorInfoFragment"
+            app:destination="@id/changeDoctorInfoFragment" />
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_doctorInfoFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeDoctorInfoFragment"
+        android:name="com.example.healt_app.roll_doctor.doctor_info.ChangeDoctorInfoFragment"
+        android:label="fragment_change_doctor_info"
+        tools:layout="@layout/fragment_change_doctor_info" >
+        <argument
+            android:name="doctor_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeDoctorAppointmentFragment"
+        android:name="com.example.healt_app.roll_doctor.appointsment.ChangeDoctorAppointmentFragment"
+        android:label="fragment_change_doctor_appointment"
+        tools:layout="@layout/fragment_change_doctor_appointment" />
+    <fragment
+        android:id="@+id/choosingPatientFragment"
+        android:name="com.example.healt_app.roll_doctor.appointsment.ChoosingPatientFragment"
+        android:label="fragment_choosing_patient"
+        tools:layout="@layout/fragment_choosing_patient" >
+        <action
+            android:id="@+id/action_choosingPatientFragment_to_createDoctorAppointmentFragment"
+            app:destination="@id/createDoctorAppointmentFragment" />
+        <action
+            android:id="@+id/action_choosingPatientFragment_to_changeDoctorAppointmentFragment"
+            app:destination="@id/changeDoctorAppointmentFragment" />
+    </fragment>
 </navigation>

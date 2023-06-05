@@ -1,4 +1,4 @@
-package com.example.healt_app.info
+package com.example.healt_app.roll_patient.info
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +14,7 @@ import com.example.healt_app.R
 import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.FragmentChangeInfoBinding
+
 
 
 class ChangeInfoFragment : Fragment() {
@@ -49,7 +50,7 @@ class ChangeInfoFragment : Fragment() {
         binding.saveBtn.setOnClickListener {
 
             with(binding){
-                if(isValidDate(birthDateEditText.text.toString())){
+                if(isValidDate(birthDateEditText.text.toString()) || birthDateEditText.text.toString().isEmpty()){
                 val name = if(nameEditText.text.toString().isEmpty())nameEditText.hint else{nameEditText.text}
                 val login = if(loginEditText.text.toString().isEmpty())loginEditText.hint else{loginEditText.text}
                 val password = if(passwordEditText.text.toString().isEmpty())passwordEditText.hint else{passwordEditText.text}

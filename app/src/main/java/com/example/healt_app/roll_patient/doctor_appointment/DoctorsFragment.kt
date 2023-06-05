@@ -1,4 +1,4 @@
-package com.example.healt_app.doctor_appointment
+package com.example.healt_app.roll_patient.doctor_appointment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healt_app.R
 import com.example.healt_app.databinding.FragmentDoctorsBinding
-import com.example.healt_app.doctor_appointment.doctorRecyclerView.DoctorAppointment
-import com.example.healt_app.doctor_appointment.doctorRecyclerView.DoctorAppointmentAdapter
+import com.example.healt_app.roll_patient.doctor_appointment.doctorRecyclerView.DoctorAppointment
+import com.example.healt_app.roll_patient.doctor_appointment.doctorRecyclerView.DoctorAppointmentAdapter
 
 class DoctorsFragment : Fragment() {
 

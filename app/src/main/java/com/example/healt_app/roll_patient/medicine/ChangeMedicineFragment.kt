@@ -1,11 +1,14 @@
-package com.example.healt_app.medicine
+package com.example.healt_app.roll_patient.medicine
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.healt_app.R
@@ -13,27 +16,41 @@ import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.DialogMedicineFrequencyPickerBinding
 import com.example.healt_app.databinding.DialogMedicineNameBinding
 import com.example.healt_app.databinding.DialogTimePickerBinding
-import com.example.healt_app.databinding.FragmentAddMedicineBinding
+import com.example.healt_app.databinding.FragmentChangeMedicineBinding
 import com.example.healt_app.dataBase.Medicine
 
 
-class AddMedicineFragment : Fragment() {
 
-    private var _binding : FragmentAddMedicineBinding? = null
+class ChangeMedicineFragment : Fragment() {
 
+    private var _binding: FragmentChangeMedicineBinding? = null
     private val binding get() = _binding!!
-    private val args: AddMedicineFragmentArgs by navArgs()
+    private val args: ChangeMedicineFragmentArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAddMedicineBinding.inflate(inflater, container , false)
+        _binding = FragmentChangeMedicineBinding.inflate(inflater , container , false)
+
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+        val args: ChangeMedicineFragmentArgs by navArgs()
+        val medicine = args.medicine
+
+
+
+
+        deleteBtnInit(medicine)
+
+        binding.saveBtn.setOnClickListener {
+            changeMedicine(medicine)
+        }
         binding.medicineName.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             val dialog = builder.create()
@@ -47,6 +64,7 @@ class AddMedicineFragment : Fragment() {
             dialog.setView(dialogBinding.root)
             dialog.show()
         }
+
         binding.freq.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             val dialog = builder.create()
@@ -62,6 +80,7 @@ class AddMedicineFragment : Fragment() {
                 getString(R.string.once_every_week)
             )
             dialogBinding.freqPicker.displayedValues = frequency
+            dialogBinding.freqPicker.value = frequency.indexOf(binding.freq.text.toString())
 
             dialogBinding.saveBtn.setOnClickListener {
                 binding.freq.text = frequency[dialogBinding.freqPicker.value]
@@ -70,6 +89,7 @@ class AddMedicineFragment : Fragment() {
             dialog.setView(dialogBinding.root)
             dialog.show()
         }
+
         binding.time.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             val dialog = builder.create()
@@ -125,7 +145,8 @@ class AddMedicineFragment : Fragment() {
             dialogBinding.hourPicker.minValue = 0
             dialogBinding.hourPicker.maxValue = 23
             dialogBinding.hourPicker.displayedValues = hours
-
+            dialogBinding.hourPicker.value =
+                hours.indexOf(binding.time.text.toString().substring(0 , 2))
 
             dialogBinding.saveBtn.setOnClickListener {
                 binding.time.text =
@@ -136,20 +157,72 @@ class AddMedicineFragment : Fragment() {
             dialog.show()
         }
 
-        binding.saveBtn.setOnClickListener {
-            val name = binding.medicineName.text.toString()
-            val freq = binding.freq.text.toString()
-            val time = binding.time.text.toString()
-            val medicine = Medicine(null,name,freq,time,args.userId)       //Don't know how to use id
-            addMedicine(medicine)
-            Navigation.findNavController(requireView()).popBackStack()
+        medicine.id?.let {
+            MainDB.getDb(requireContext()).getDao().getMedicineByID(medicine.id).asLiveData()
+                .observe(requireActivity()) { med ->
+                    binding.medicineName.text = med.name
+                    binding.freq.text = med.frequency
+                    binding.time.text = med.time
+                }
+        }
+
+
+    }
+
+    private fun deleteBtnInit(medicine: Medicine) {
+        binding.deleteBtn.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle(R.string.deleting)
+
+            builder.setMessage(getString(R.string.delete_medicine_from_the_list_question))
+            builder.setPositiveButton(R.string.ok) { dialogInterface , _ ->
+                deleteMedicine(medicine)
+                Navigation.findNavController(requireView()).popBackStack()
+            }
+            builder.setNegativeButton(R.string.cancel) { dialogInterface , _ ->
+            }
+            val dialog = builder.create()
+            dialog.show()
+
         }
     }
 
-    private fun addMedicine(medicine: Medicine) {
-        Thread{
-          MainDB.getDb(requireContext()).getDao().insertMedicine(medicine)
+    private fun deleteMedicine(medicine: Medicine) {
+        Thread {
+            medicine.id?.let { MainDB.getDb(requireContext()).getDao().deleteMedicineById(it) }
         }.start()
     }
+
+    private fun changeMedicine(medicine: Medicine) {
+
+        var name = binding.medicineName.text.toString()
+        if (name == "") {
+            name = medicine.name
+        }
+        var freq = binding.freq.text.toString()
+        if (freq == "") {
+            freq = medicine.frequency
+        }
+        var time = binding.time.text.toString()
+        if (time == "") {
+            time = medicine.time
+        }
+        val changedMedicine = Medicine(medicine.id , name , freq , time , args.userId)
+
+
+        Toast.makeText(requireContext() , changedMedicine.toString() , Toast.LENGTH_LONG).show()
+
+        changedMedicineInDB(changedMedicine)
+
+
+        Navigation.findNavController(requireView()).popBackStack()
+    }
+
+    private fun changedMedicineInDB(medicine: Medicine) {
+        Thread {
+            MainDB.getDb(requireContext()).getDao().updateMedicine(medicine)
+        }.start()
+    }
+
 
 }

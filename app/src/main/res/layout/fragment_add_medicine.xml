@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_list"
     android:layout_height="match_parent"
-    tools:context=".medicine.AddMedicineFragment">
+    tools:context=".roll_patient.medicine.AddMedicineFragment">
 
     <TextView
         android:id="@+id/header_title"

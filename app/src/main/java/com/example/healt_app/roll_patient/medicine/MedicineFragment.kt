@@ -1,4 +1,4 @@
-package com.example.healt_app.medicine
+package com.example.healt_app.roll_patient.medicine
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.FragmentMedicineBinding
 import com.example.healt_app.dataBase.Medicine
-import com.example.healt_app.medicine.medicineRecyclerView.MedicineAdapter
+
+import com.example.healt_app.roll_patient.medicine.medicineRecyclerView.MedicineAdapter
 
 
 class MedicineFragment : Fragment(), MedicineAdapter.Listener {
@@ -52,7 +53,8 @@ class MedicineFragment : Fragment(), MedicineAdapter.Listener {
         binding.medicineRecyclerView.adapter = medicineAdapter
         binding.medicineRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.addCardView.setOnClickListener {
-            val action = MedicineFragmentDirections.actionMedicineFragmentToAddMedicineFragment(userId = args.userId)
+            val action =
+                MedicineFragmentDirections.actionMedicineFragmentToAddMedicineFragment(userId = args.userId)
             Navigation.findNavController(requireView()).navigate(action)
         }
 
@@ -63,7 +65,10 @@ class MedicineFragment : Fragment(), MedicineAdapter.Listener {
 
     override fun onClick(medicine: Medicine) {
 
-        val action = MedicineFragmentDirections.actionMedicineFragmentToChangeMedicineFragment(medicine = medicine, userId = args.userId )
+        val action = MedicineFragmentDirections.actionMedicineFragmentToChangeMedicineFragment(
+            medicine = medicine ,
+            userId = args.userId
+        )
         Navigation.findNavController(requireView()).navigate(action)
     }
 

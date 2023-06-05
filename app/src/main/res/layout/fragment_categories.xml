@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/categoriesFragment"
+    android:id="@+id/diseasesFragment"
     android:background="@drawable/gradient_list"
-    tools:context=".CategoriesFragment">
+    tools:context=".roll_patient.DiseasesFragment">
 
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
-        android:text="@string/categories"
+        android:text="@string/diseases"
         android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/black"
         android:textSize="@dimen/heading_text_size"

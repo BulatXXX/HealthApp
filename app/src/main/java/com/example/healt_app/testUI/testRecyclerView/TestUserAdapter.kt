@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
 import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.TestUserCardBinding
-import com.example.healt_app.doctor_appointment.doctorRecyclerView.DoctorAppointment
+import com.example.healt_app.roll_patient.doctor_appointment.doctorRecyclerView.DoctorAppointment
 
 class TestUserAdapter(private val listener: Listener): RecyclerView.Adapter<TestUserAdapter.TestUserHolder>() {
     private var userList = ArrayList<User>()

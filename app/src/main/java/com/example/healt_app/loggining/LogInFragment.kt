@@ -39,46 +39,67 @@ class LogInFragment : Fragment() {
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        val toast: Toast = Toast.makeText(requireContext() , "Logged" , Toast.LENGTH_SHORT)
+
         val db = MainDB.getDb(requireContext())
         val sharedPref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
-        val id = sharedPref.getInt("ID",-1)
-        if(id != -1){
-            db.getDao().getUserByID(id).asLiveData().observe(requireActivity()){
-               val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
-                Navigation.findNavController(requireView()).navigate(action)
+        val id = sharedPref.getInt("ID" , -1)
+        if (id != -1) {
+            db.getDao().getUserByID(id).asLiveData().observe(requireActivity()) {
+                if (it.roll) {
+                    val action =
+                        LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it.id!!)
+                    Navigation.findNavController(requireView()).navigate(action)
+
+                } else {
+                    val action =
+                        LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
+                    Navigation.findNavController(requireView()).navigate(action)
+                }
             }
         }
         binding.logInBtn.setOnClickListener {
-            var id : Int? = null
+            var id: Int? = null
             val login = binding.logInEt.text.toString()
             val password = binding.passwordEt.text.toString()
 
 
 
 
-            db.getDao().getUser(login,password).asLiveData().observe(requireActivity()){
-                if(it != null){
+            db.getDao().getUser(login , password).asLiveData().observe(requireActivity()) {
+                if (it != null) {
                     val sPref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
                     val ed = sPref.edit()
-                    it.id?.let { it1 -> ed.putInt("ID", it1) }
+                    it.id?.let { it1 -> ed.putInt("ID" , it1) }
                     ed.commit()
-                    val action = LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
-                    Navigation.findNavController(requireView()).navigate(action)
-                }
-                else{
-                    if(binding.logInEt.text.toString().isEmpty()){
-                        Toast.makeText(requireContext(), R.string.enter_login,Toast.LENGTH_SHORT).show()
+                    if (it.roll) {
+                        val action =
+                            LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it.id!!)
+                        Navigation.findNavController(requireView()).navigate(action)
+
+                    } else {
+                        val action =
+                            LogInFragmentDirections.actionLogInFragmentToHomeScreenFragment(it)
+                        Navigation.findNavController(requireView()).navigate(action)
                     }
-                    else if (binding.passwordEt.text.toString().isEmpty()){
-                        Toast.makeText(requireContext(), R.string.enter_password,Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(requireContext(), R.string.wrong_login_or_password,Toast.LENGTH_SHORT).show()
+                } else {
+                    if (binding.logInEt.text.toString().isEmpty()) {
+                        Toast.makeText(requireContext() , R.string.enter_login , Toast.LENGTH_SHORT)
+                            .show()
+                    } else if (binding.passwordEt.text.toString().isEmpty()) {
+                        Toast.makeText(
+                            requireContext() ,
+                            R.string.enter_password ,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext() ,
+                            R.string.wrong_login_or_password ,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
-
-
 
 
         }
@@ -87,7 +108,7 @@ class LogInFragment : Fragment() {
             val action = LogInFragmentDirections.actionLogInFragmentToRegistrationFragment()
             Navigation.findNavController(requireView()).navigate(action)
         }
-        toast.show()
+
 
         binding.welcome.setOnClickListener {
             val action = LogInFragmentDirections.actionLogInFragmentToTestFragment()

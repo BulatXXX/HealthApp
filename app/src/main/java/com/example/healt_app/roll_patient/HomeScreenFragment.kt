@@ -1,4 +1,4 @@
-package com.example.healt_app
+package com.example.healt_app.roll_patient
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+
 import com.example.healt_app.databinding.FragmentHomeScreenBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class HomeScreenFragment : Fragment() {
@@ -36,6 +38,20 @@ class HomeScreenFragment : Fragment() {
         val args : HomeScreenFragmentArgs by navArgs()
         val user = args.user
 
+        if(user.weight==0.0 || user.height==0){
+            val snack =Snackbar.make(requireView(),"Заполните недостающую информацию",5000)
+            snack.setAction("Заполнить"){
+                val action = user.id?.let { it1 ->
+                    HomeScreenFragmentDirections.actionHomeScreenFragmentToChangeInfoFragment(
+                        userId = it1
+                    )
+                }
+                action?.let { it1 -> Navigation.findNavController(requireView()).navigate(it1) }
+            }
+            snack.show()
+
+        }
+
         val animationDrawable = binding.homeScreenFragment.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)
@@ -53,7 +69,11 @@ class HomeScreenFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.medicineCardView.setOnClickListener {
-            val action = user.id?.let { it1 -> HomeScreenFragmentDirections.actionHomeScreenFragmentToMedicineFragment(userId = it1) }
+            val action = user.id?.let { it1 ->
+                HomeScreenFragmentDirections.actionHomeScreenFragmentToMedicineFragment(
+                    userId = it1
+                )
+            }
             action?.let { it1 -> Navigation.findNavController(requireView()).navigate(it1) }
         }
 

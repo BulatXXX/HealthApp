@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/homeScreenFragment"
     android:background="@drawable/gradient_list"
-    tools:context=".HomeScreenFragment">
+    tools:context=".roll_patient.HomeScreenFragment">
 
     <androidx.cardview.widget.CardView
 
@@ -126,7 +126,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:text="Категории"
+                android:text="@string/diseases"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_medium"
                 android:textSize="16sp"
@@ -166,7 +166,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:text="Препараты"
+                android:text="@string/medicine"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_medium"
                 android:textSize="16sp"
@@ -204,7 +204,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:text="Информация"
+                android:text="@string/info"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_medium"
                 android:textSize="16sp"
@@ -243,7 +243,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="10dp"
-                android:text="Записи к врачу"
+                android:text="@string/appointment"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_medium"
                 android:textSize="16sp"

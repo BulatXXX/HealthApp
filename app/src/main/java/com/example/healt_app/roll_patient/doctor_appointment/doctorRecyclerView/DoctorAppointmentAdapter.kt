@@ -1,4 +1,4 @@
-package com.example.healt_app.doctor_appointment.doctorRecyclerView
+package com.example.healt_app.roll_patient.doctor_appointment.doctorRecyclerView
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

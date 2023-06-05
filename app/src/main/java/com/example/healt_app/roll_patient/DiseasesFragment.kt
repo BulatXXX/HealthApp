@@ -1,4 +1,5 @@
-package com.example.healt_app
+package com.example.healt_app.roll_patient
+
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +9,16 @@ import android.view.ViewGroup
 import com.example.healt_app.R
 
 
-class CreateDoctorAppointmentFragment : Fragment() {
+class DiseasesFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater , container: ViewGroup? ,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_doctor_appointment , container , false)
+
+        return inflater.inflate(R.layout.fragment_categories , container, false)
     }
 
 
