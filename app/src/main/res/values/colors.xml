@@ -14,6 +14,7 @@
     <color name="pink">#FFEBAFAB</color>
     <color name="grey">#3F3F3F</color>
     <color name="blue">#FF0341FF</color>
+    <color name="divider_color">#332D55</color>
 
 
 </resources>

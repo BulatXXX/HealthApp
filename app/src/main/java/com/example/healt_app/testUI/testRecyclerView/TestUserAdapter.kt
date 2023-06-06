@@ -2,14 +2,12 @@ package com.example.healt_app.testUI.testRecyclerView
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.OnReceiveContentListener
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healt_app.R
 import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.TestUserCardBinding
-import com.example.healt_app.roll_patient.doctor_appointment.doctorRecyclerView.DoctorAppointment
 
 class TestUserAdapter(private val listener: Listener): RecyclerView.Adapter<TestUserAdapter.TestUserHolder>() {
     private var userList = ArrayList<User>()

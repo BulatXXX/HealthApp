@@ -164,7 +164,7 @@
         tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/appointsmentsFragment"
-        android:name="com.example.healt_app.roll_doctor.appointsment.AppointsmentsFragment"
+        android:name="com.example.healt_app.roll_doctor.appointment.AppointsmentsFragment"
         android:label="fragment_appointsments"
         tools:layout="@layout/fragment_appointsments" >
         <argument
@@ -176,7 +176,7 @@
     </fragment>
     <fragment
         android:id="@+id/createDoctorAppointmentFragment"
-        android:name="com.example.healt_app.roll_doctor.appointsment.CreateDoctorAppointmentFragment"
+        android:name="com.example.healt_app.roll_doctor.appointment.CreateDoctorAppointmentFragment"
         android:label="fragment_create_doctor_appointment"
         tools:layout="@layout/fragment_create_doctor_appointment" >
         <argument
@@ -265,12 +265,12 @@
     </fragment>
     <fragment
         android:id="@+id/changeDoctorAppointmentFragment"
-        android:name="com.example.healt_app.roll_doctor.appointsment.ChangeDoctorAppointmentFragment"
+        android:name="com.example.healt_app.roll_doctor.appointment.ChangeDoctorAppointmentFragment"
         android:label="fragment_change_doctor_appointment"
         tools:layout="@layout/fragment_change_doctor_appointment" />
     <fragment
         android:id="@+id/choosingPatientFragment"
-        android:name="com.example.healt_app.roll_doctor.appointsment.ChoosingPatientFragment"
+        android:name="com.example.healt_app.roll_doctor.appointment.ChoosingPatientFragment"
         android:label="fragment_choosing_patient"
         tools:layout="@layout/fragment_choosing_patient" >
         <action

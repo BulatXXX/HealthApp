@@ -66,15 +66,24 @@
                 android:textSize="@dimen/large_text_size"
                 android:textColor="@color/black"
                 android:hint="@string/password"/>
-            <EditText
+            <TextView
+                android:layout_marginTop="4dp"
                 android:id="@+id/birthDate_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
+                android:layout_marginStart="3dp"
                 android:textColor="@color/black"
                 android:hint="Birth Date"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="2dp"
+                app:dividerColor="@color/divider_color"/>
             <EditText
                 android:id="@+id/weight_EditText"
                 android:layout_width="match_parent"

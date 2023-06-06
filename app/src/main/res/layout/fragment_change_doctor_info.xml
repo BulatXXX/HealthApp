@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".roll_doctor.doctor_info.ChangeDoctorInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/info_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/heading_top_margin"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/info"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading_text_size"
+        app:layout_constraintStart_toStartOf="@+id/information_card"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/information_card"
+        android:layout_width="@dimen/card_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_large_top_margin"
+
+        app:cardCornerRadius="@dimen/card_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info_tv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/large_text_size"
+            android:layout_marginEnd="@dimen/large_text_size"
+            android:layout_marginTop="@dimen/large_text_size"
+            android:layout_marginBottom="@dimen/large_text_size"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/name_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:textColor="@color/black"
+                android:hint="Name"/>
+            <EditText
+                android:id="@+id/login_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:textColor="@color/black"
+                android:hint="Login"/>
+            <EditText
+                android:id="@+id/password_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:textColor="@color/black"
+                android:hint="@string/password"/>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/birthDate_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/black"
+                android:hint="Birth Date"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="2dp"
+                app:dividerColor="@color/divider_color"/>
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/post_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/large_text_size"
+                android:paddingTop="3dp"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/black"
+                android:hint="@string/post"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="2dp"
+                app:dividerColor="@color/divider_color"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/Widget.Material3.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_pink"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/save"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/large_text_size"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

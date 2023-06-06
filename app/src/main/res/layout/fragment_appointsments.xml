@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".roll_doctor.appointsment.AppointsmentsFragment">
+    tools:context=".roll_doctor.appointment.AppointsmentsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

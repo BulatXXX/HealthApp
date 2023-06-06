@@ -49,4 +49,5 @@
     <string name="patients">Пациенты</string>
     <string name="post">Должность</string>
     <string name="pick_post">Выбрать должность</string>
+    <string name="select_birth_date">Укажите дату рождения</string>
 </resources>

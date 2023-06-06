@@ -14,7 +14,9 @@ import com.example.healt_app.R
 import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.FragmentChangeInfoBinding
-
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ChangeInfoFragment : Fragment() {
@@ -36,6 +38,20 @@ class ChangeInfoFragment : Fragment() {
         super.onViewCreated(view , savedInstanceState)
         val args : ChangeInfoFragmentArgs by navArgs()
         val db = MainDB.getDb(requireContext())
+        binding.birthDateEditText.setOnClickListener{
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText(R.string.select_birth_date)
+                .setSelection((MaterialDatePicker.todayInUtcMilliseconds()))
+                .build()
+            picker.addOnPositiveButtonClickListener {
+                val dateSelected = SimpleDateFormat("dd.MM.YYYY", Locale.getDefault()).format(it)
+                binding.birthDateEditText.text = dateSelected
+            }
+            picker.addOnNegativeButtonClickListener {
+                picker.dismiss()
+            }
+            picker.show(requireActivity().supportFragmentManager,"DatePicker")
+        }
         db.getDao().getUserByID(args.userId).asLiveData().observe(requireActivity()){
             with(binding){
                 nameEditText.hint = it.name

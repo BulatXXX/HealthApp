@@ -13,6 +13,9 @@ import com.example.healt_app.R
 import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.dataBase.User
 import com.example.healt_app.databinding.FragmentRegistrationBinding
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class RegistrationFragment : Fragment() {
@@ -34,6 +37,20 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
 
+        binding.birthDayPicker.setOnClickListener{
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText(R.string.select_birth_date)
+                .setSelection((MaterialDatePicker.todayInUtcMilliseconds()))
+                .build()
+            picker.addOnPositiveButtonClickListener {
+                val dateSelected = SimpleDateFormat("dd.MM.YYYY", Locale.getDefault()).format(it)
+                binding.birthDayPicker.setText(dateSelected)
+            }
+            picker.addOnNegativeButtonClickListener {
+                picker.dismiss()
+            }
+            picker.show(requireActivity().supportFragmentManager,"DatePicker")
+        }
 
 
         binding.registrationBtn.setOnClickListener {
