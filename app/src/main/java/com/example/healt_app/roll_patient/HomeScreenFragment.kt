@@ -38,19 +38,7 @@ class HomeScreenFragment : Fragment() {
         val args : HomeScreenFragmentArgs by navArgs()
         val user = args.user
 
-        if(user.weight==0.0 || user.height==0){
-            val snack =Snackbar.make(requireView(),"Заполните недостающую информацию",5000)
-            snack.setAction("Заполнить"){
-                val action = user.id?.let { it1 ->
-                    HomeScreenFragmentDirections.actionHomeScreenFragmentToChangeInfoFragment(
-                        userId = it1
-                    )
-                }
-                action?.let { it1 -> Navigation.findNavController(requireView()).navigate(it1) }
-            }
-            snack.show()
 
-        }
 
         val animationDrawable = binding.homeScreenFragment.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)

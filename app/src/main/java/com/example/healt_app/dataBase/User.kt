@@ -16,20 +16,20 @@ data class User(
     val password: String ,
 
     @ColumnInfo(name = "name")
-    val name: String ,
+    var name: String ,
     @ColumnInfo(name = "birth_date")
-    val birthDate: String ,
+    var birthDate: String ,
 
     @ColumnInfo(name = "roll")
     val roll: Boolean ,
 
     @ColumnInfo(name = "post")
-    val post: String? = "" ,
+    var post: String? = "" ,
 
     @ColumnInfo(name = "weight")
-    val weight: Double? = 0.0 ,
+    var weight: Double? = 0.0 ,
     @ColumnInfo(name = "height")
-    val height: Int? = 0 ,
+    var height: Int? = 0 ,
     )
 
     : Parcelable {

@@ -47,4 +47,6 @@
     <string name="diseases">Заболевания</string>
     <string name="appointment">Записи</string>
     <string name="patients">Пациенты</string>
+    <string name="post">Должность</string>
+    <string name="pick_post">Выбрать должность</string>
 </resources>

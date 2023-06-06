@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Posts">
+        <item>Кардиолог</item>
+        <item>Стоматолог</item>
+        <item>Хирург</item>
+        <item>Травматолог</item>
+    </string-array>
+
+</resources>

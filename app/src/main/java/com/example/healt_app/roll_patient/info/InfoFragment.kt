@@ -2,13 +2,11 @@ package com.example.healt_app.roll_patient.info
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 
 import androidx.lifecycle.asLiveData
@@ -24,9 +22,6 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.Period
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import kotlin.math.abs
 import kotlin.math.pow
 
 class InfoFragment : Fragment() {
@@ -92,16 +87,13 @@ class InfoFragment : Fragment() {
 
     private fun countAge(birthDate: String): Int {
 
-        val current_date = LocalDate.now()
-
-
+        val currentDate = LocalDate.now()
         val birth_date = LocalDate.of(
             birthDate.substring(6).toInt() ,
             birthDate.substring(3 , 5).toInt() ,
             birthDate.substring(0 , 2).toInt()
         )
-        val age = Period.between(birth_date , current_date).years
-        return age
+        return Period.between(birth_date , currentDate).years
     }
 
     private fun initPersonalInfo(user: User) {

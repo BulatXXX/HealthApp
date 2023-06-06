@@ -27,11 +27,15 @@ interface Dao {
     @Query("SELECT * FROM users WHERE id = :id")
     fun getUserByID(id : Int) : Flow<User>
 
+
     @Update
     fun updateUser(user: User)
 
     @Query("SELECT * FROM users WHERE login = :login AND password = :password")
     fun getUser(login: String, password: String): Flow<User>
+
+    @Query("SELECT id FROM users WHERE login = :login AND password = :password")
+    fun getUserID(login: String, password: String): Int
 
     @Query("SELECT * FROM users WHERE login = :login ")
     fun getUser(login: String): Flow<User>
