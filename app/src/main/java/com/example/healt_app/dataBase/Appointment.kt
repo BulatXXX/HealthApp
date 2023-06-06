@@ -1,5 +1,7 @@
 package com.example.healt_app.dataBase
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -23,4 +25,41 @@ data class Appointment(
     @ColumnInfo(name = "post")
     val post: String
 
-)
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int ,
+        parcel.readInt() ,
+        parcel.readInt() ,
+        parcel.readString().toString() ,
+        parcel.readString().toString() ,
+        parcel.readString().toString() ,
+        parcel.readString().toString() ,
+        parcel.readString().toString()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel , flags: Int) {
+        parcel.writeValue(id)
+        parcel.writeInt(doctorId)
+        parcel.writeInt(patientId)
+        parcel.writeString(doctorName)
+        parcel.writeString(patientName)
+        parcel.writeString(date)
+        parcel.writeString(time)
+        parcel.writeString(post)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Appointment> {
+        override fun createFromParcel(parcel: Parcel): Appointment {
+            return Appointment(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Appointment?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
