@@ -39,7 +39,6 @@ class HomeScreenFragment : Fragment() {
         val user = args.user
 
 
-
         val animationDrawable = binding.homeScreenFragment.background as AnimationDrawable
         animationDrawable.setEnterFadeDuration(2000)
         animationDrawable.setExitFadeDuration(4000)

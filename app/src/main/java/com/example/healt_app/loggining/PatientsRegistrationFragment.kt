@@ -1,5 +1,6 @@
 package com.example.healt_app.loggining
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.text.style.LineHeightSpan
 import androidx.fragment.app.Fragment
@@ -32,6 +33,12 @@ class PatientsRegistrationFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.patientsRegistrationFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         binding.registrationBtn.setOnClickListener {
 
             val user = args.user

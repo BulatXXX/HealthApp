@@ -1,5 +1,6 @@
 package com.example.healt_app.roll_patient.doctor_appointment
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,6 +42,10 @@ class DoctorsFragment : Fragment() ,AppointmentAdapter.Listener{
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val db = MainDB.getDb(requireContext())
+        val animationDrawable = binding.doctorsFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
         binding.doctorsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         db.getDao().getAppointmentsByPatientId(args.patientId).asLiveData().observe(requireActivity()){
             appointmentsList.clear()

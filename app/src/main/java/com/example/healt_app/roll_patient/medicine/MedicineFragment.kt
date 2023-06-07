@@ -1,5 +1,6 @@
 package com.example.healt_app.roll_patient.medicine
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,6 +42,12 @@ class MedicineFragment : Fragment(), MedicineAdapter.Listener {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.medicineFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         db.getDao().getMedicineByPatientId(args.userId).asLiveData().observe(requireActivity()){list->
             medicineList.clear()
             list.forEach{

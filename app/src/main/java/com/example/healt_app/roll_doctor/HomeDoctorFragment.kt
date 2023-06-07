@@ -1,5 +1,6 @@
 package com.example.healt_app.roll_doctor
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,6 +28,12 @@ class HomeDoctorFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+
+        val animationDrawable = binding.homeDoctorFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         binding.infoCardView.setOnClickListener {
             val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToDoctorInfoFragment(args.doctor.id!!)
             Navigation.findNavController(requireView()).navigate(action)

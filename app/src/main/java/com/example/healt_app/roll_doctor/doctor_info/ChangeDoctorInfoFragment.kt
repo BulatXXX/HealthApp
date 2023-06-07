@@ -1,6 +1,7 @@
 package com.example.healt_app.roll_doctor.doctor_info
 
 import android.app.AlertDialog
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,12 @@ class ChangeDoctorInfoFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.changeDoctorInfoFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         db.getDao().getUserByID(args.doctorId).asLiveData().observe(requireActivity()) {
             binding.nameEditText.hint = it.name
             binding.loginEditText.hint = it.login

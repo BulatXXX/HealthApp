@@ -1,6 +1,7 @@
 package com.example.healt_app.roll_doctor.disease
 
 import android.app.AlertDialog
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,12 @@ class ChangeDiseaseFragment : Fragment() {
         binding.patientName.text = args.disease.doctorName
         binding.diseaseName.hint = args.disease.name
         binding.description.hint = args.disease.description
+
+        val animationDrawable = binding.changeDiseaseFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         val db = MainDB.getDb(requireContext())
         binding.saveBtn.setOnClickListener {
             val disease = Disease(
@@ -45,6 +52,7 @@ class ChangeDiseaseFragment : Fragment() {
             Thread{
                 db.getDao().updateDisease(disease)
             }.start()
+            Navigation.findNavController(requireView()).popBackStack()
         }
         deleteBtnInit(args.disease)
     }

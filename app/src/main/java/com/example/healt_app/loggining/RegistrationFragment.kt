@@ -1,6 +1,7 @@
 package com.example.healt_app.loggining
 
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -36,7 +37,10 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-
+        val animationDrawable = binding.registrationFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
         binding.birthDayPicker.setOnClickListener{
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(R.string.select_birth_date)

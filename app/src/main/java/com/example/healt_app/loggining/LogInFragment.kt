@@ -2,6 +2,7 @@ package com.example.healt_app.loggining
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -32,6 +33,8 @@ class LogInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+
         _binding = FragmentLogInBinding.inflate(inflater , container , false)
         return binding.root
     }
@@ -39,7 +42,10 @@ class LogInFragment : Fragment() {
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-
+        val animationDrawable = binding.logInFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
         val db = MainDB.getDb(requireContext())
         val sharedPref = requireActivity().getPreferences(Activity.MODE_PRIVATE)
         val id = sharedPref.getInt("ID" , -1)

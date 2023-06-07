@@ -1,6 +1,7 @@
 package com.example.healt_app.roll_doctor.appointment
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.text.format.DateFormat.is24HourFormat
 import androidx.fragment.app.Fragment
@@ -40,6 +41,12 @@ class CreateDoctorAppointmentFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.createDoctorAppointmentFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         binding.patientName.text = args.patient.name
         binding.time.setOnClickListener {
             val isSystem24Hour = is24HourFormat(requireContext())

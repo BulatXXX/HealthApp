@@ -1,6 +1,7 @@
 package com.example.healt_app.loggining
 
 import android.app.AlertDialog
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,6 +34,12 @@ class DoctorsRegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+
+        val animationDrawable = binding.doctorsRegistrationFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         val db = MainDB.getDb(requireContext())
         binding.pickPostBtn.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())

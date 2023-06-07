@@ -1,5 +1,6 @@
 package com.example.healt_app.roll_patient.info
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,6 +39,12 @@ class ChangeInfoFragment : Fragment() {
         super.onViewCreated(view , savedInstanceState)
         val args : ChangeInfoFragmentArgs by navArgs()
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.changeInfoFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
         binding.birthDateEditText.setOnClickListener{
             val picker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(R.string.select_birth_date)

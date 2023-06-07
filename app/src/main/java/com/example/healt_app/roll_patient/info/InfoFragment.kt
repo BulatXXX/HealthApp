@@ -2,6 +2,7 @@ package com.example.healt_app.roll_patient.info
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +46,12 @@ class InfoFragment : Fragment() {
         val args: InfoFragmentArgs by navArgs()
         val user = args.user
         val db = MainDB.getDb(requireContext())
+
+        val animationDrawable = binding.infoFragment.background as AnimationDrawable
+        animationDrawable.setEnterFadeDuration(2000)
+        animationDrawable.setExitFadeDuration(4000)
+        animationDrawable.start()
+
 
         user.id?.let {
             db.getDao().getUserByID(it).asLiveData().observe(requireActivity()) { user ->
