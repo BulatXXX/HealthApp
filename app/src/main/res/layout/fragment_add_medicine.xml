@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/heading_top_margin"
         android:fontFamily="@font/montserrat_semibold"
         android:singleLine="true"
-        android:text="@string/Changing"
+        android:text="@string/adding"
         android:textColor="@color/black"
         android:textSize="@dimen/heading_text_size"
         app:layout_constraintStart_toStartOf="@id/medicineCard"
@@ -41,7 +41,6 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/medicine_name"
-
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

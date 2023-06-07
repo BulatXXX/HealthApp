@@ -3,6 +3,7 @@ package com.example.healt_app.roll_patient.medicine
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +16,10 @@ import com.example.healt_app.R
 import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.DialogMedicineFrequencyPickerBinding
 import com.example.healt_app.databinding.DialogMedicineNameBinding
-import com.example.healt_app.databinding.DialogTimePickerBinding
 import com.example.healt_app.databinding.FragmentChangeMedicineBinding
 import com.example.healt_app.dataBase.Medicine
-
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 
 
 class ChangeMedicineFragment : Fragment() {
@@ -91,70 +92,23 @@ class ChangeMedicineFragment : Fragment() {
         }
 
         binding.time.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-            val dialog = builder.create()
-            val layoutInflater = layoutInflater
-            val dialogBinding = DialogTimePickerBinding.inflate(layoutInflater)
-            val minutes = arrayOf(
-                "00" ,
-                "05" ,
-                "10" ,
-                "15" ,
-                "20" ,
-                "25" ,
-                "30" ,
-                "35" ,
-                "40" ,
-                "45" ,
-                "50" ,
-                "55"
-            )
-            dialogBinding.minutesPicker.minValue = 0
-            dialogBinding.minutesPicker.maxValue = 11
-            dialogBinding.minutesPicker.displayedValues = minutes
-            dialogBinding.minutesPicker.value =
-                minutes.indexOf(binding.time.text.toString().substring(3))
+            val isSystem24Hour = DateFormat.is24HourFormat(requireContext())
 
-            val hours = arrayOf(
-                "00" ,
-                "01" ,
-                "02" ,
-                "03" ,
-                "04" ,
-                "05" ,
-                "06" ,
-                "07" ,
-                "08" ,
-                "09" ,
-                "10" ,
-                "11" ,
-                "12" ,
-                "13" ,
-                "14" ,
-                "15" ,
-                "16" ,
-                "17" ,
-                "18" ,
-                "19" ,
-                "20" ,
-                "21" ,
-                "22" ,
-                "23"
-            )
+            val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+            val picker = MaterialTimePicker.Builder()
+                .setTimeFormat(clockFormat)
+                .setHour(12)
+                .setMinute(0)
+                .setTitleText(getString(R.string.choose_time))
+                .build()
+            picker.show(childFragmentManager,"TAG")
+            picker.addOnPositiveButtonClickListener {
+                binding.time.text = "${ picker.hour.toString()}:${ picker.minute.toString()}"
 
-            dialogBinding.hourPicker.minValue = 0
-            dialogBinding.hourPicker.maxValue = 23
-            dialogBinding.hourPicker.displayedValues = hours
-            dialogBinding.hourPicker.value =
-                hours.indexOf(binding.time.text.toString().substring(0 , 2))
-
-            dialogBinding.saveBtn.setOnClickListener {
-                binding.time.text =
-                    hours[dialogBinding.hourPicker.value] + ":" + minutes[dialogBinding.minutesPicker.value]
-                dialog.dismiss()
             }
-            dialog.setView(dialogBinding.root)
-            dialog.show()
+            picker.addOnNegativeButtonClickListener {
+                picker.dismiss()
+            }
         }
 
         medicine.id?.let {

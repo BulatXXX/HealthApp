@@ -47,7 +47,7 @@ class LogInFragment : Fragment() {
             db.getDao().getUserByID(id).asLiveData().observe(requireActivity()) {
                 if (it.roll) {
                     val action =
-                        LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it.id!!)
+                        LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it)
                     Navigation.findNavController(requireView()).navigate(action)
 
                 } else {
@@ -73,7 +73,7 @@ class LogInFragment : Fragment() {
                     ed.commit()
                     if (it.roll) {
                         val action =
-                            LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it.id!!)
+                            LogInFragmentDirections.actionLogInFragmentToHomeDoctorFragment(it)
                         Navigation.findNavController(requireView()).navigate(action)
 
                     } else {

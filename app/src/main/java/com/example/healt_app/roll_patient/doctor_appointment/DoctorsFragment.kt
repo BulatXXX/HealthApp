@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.healt_app.RecyclerViewsAdapters.AppointmentAdapter
+import com.example.healt_app.RecyclerViewAdapters.AppointmentAdapter
 import com.example.healt_app.databinding.FragmentDoctorsBinding
 import com.example.healt_app.dataBase.Appointment
+import com.example.healt_app.dataBase.MainDB
 
 class DoctorsFragment : Fragment() ,AppointmentAdapter.Listener{
 
     private var _binding: FragmentDoctorsBinding? = null
 
     private val binding get() = _binding!!
+    private val args :DoctorsFragmentArgs by navArgs()
     private var appointmentsList = ArrayList<Appointment>()
     private val appointmentAdapter = AppointmentAdapter(this,false)
 
@@ -36,29 +40,18 @@ class DoctorsFragment : Fragment() ,AppointmentAdapter.Listener{
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        getListFromDB(appointmentsList)
-        appointmentAdapter.updateList(appointmentsList)
-        binding.doctorsRecyclerView.adapter = appointmentAdapter
+        val db = MainDB.getDb(requireContext())
         binding.doctorsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-    }
-    private fun getDoctorAppointmentList(){
-
-    }
-    private fun getListFromDB(arrayList: ArrayList<Appointment>) {
-        for (i in 1..5) {
-            val appointment = Appointment(
-                id = i ,
-                doctorName = "Doctor $i" ,
-                patientName = "Patient 0${i * 20}" ,
-                doctorId = i,
-                patientId = i*20,
-                time = "1$i:$i$i",
-                date = "Day $i",
-                post = "Medic $i Medic"
-            )
-            arrayList.add(appointment)
+        db.getDao().getAppointmentsByPatientId(args.patientId).asLiveData().observe(requireActivity()){
+            appointmentsList.clear()
+            it.forEach { appointment ->
+                appointmentsList.add(appointment)
+            }
+            appointmentAdapter.updateList(appointmentsList)
+            binding.doctorsRecyclerView.adapter = appointmentAdapter
         }
     }
+
 
     override fun onClick(appointment: Appointment) {
         //Nothing cause created fo doctors

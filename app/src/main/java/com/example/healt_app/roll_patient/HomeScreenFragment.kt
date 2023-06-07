@@ -45,7 +45,7 @@ class HomeScreenFragment : Fragment() {
         animationDrawable.setExitFadeDuration(4000)
         animationDrawable.start()
         binding.categoriesCardView.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToCategoriesFragment()
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToCategoriesFragment(patient = args.user)
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.infoCardView.setOnClickListener {
@@ -53,7 +53,7 @@ class HomeScreenFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.doctorsAppointmentCardView.setOnClickListener {
-            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToDoctorsFragment()
+            val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToDoctorsFragment(args.user.id!!)
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.medicineCardView.setOnClickListener {

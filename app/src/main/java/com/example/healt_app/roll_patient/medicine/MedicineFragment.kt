@@ -13,7 +13,7 @@ import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.FragmentMedicineBinding
 import com.example.healt_app.dataBase.Medicine
 
-import com.example.healt_app.RecyclerViewsAdapters.MedicineAdapter
+import com.example.healt_app.RecyclerViewAdapters.MedicineAdapter
 
 
 class MedicineFragment : Fragment(), MedicineAdapter.Listener {

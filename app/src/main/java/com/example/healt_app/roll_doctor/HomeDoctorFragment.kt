@@ -28,15 +28,15 @@ class HomeDoctorFragment : Fragment() {
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
         binding.infoCardView.setOnClickListener {
-            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToDoctorInfoFragment(args.doctorId)
+            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToDoctorInfoFragment(args.doctor.id!!)
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.patientsCardView.setOnClickListener {
-            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToPatientsFragment(args.doctorId)
+            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToPatientsFragment(args.doctor)
             Navigation.findNavController(requireView()).navigate(action)
         }
         binding.doctorsAppointmentCardView.setOnClickListener {
-            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToAppointsmentsFragment(args.doctorId)
+            val action = HomeDoctorFragmentDirections.actionHomeDoctorFragmentToAppointsmentsFragment(args.doctor)
             Navigation.findNavController(requireView()).navigate(action)
         }
     }

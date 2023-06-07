@@ -15,7 +15,7 @@
             app:destination="@id/infoFragment" />
         <action
             android:id="@+id/action_homeScreenFragment_to_categoriesFragment"
-            app:destination="@id/categoriesFragment" />
+            app:destination="@id/diseasesFragment" />
         <action
             android:id="@+id/action_homeScreenFragment_to_doctorsFragment"
             app:destination="@id/doctorsFragment" />
@@ -30,10 +30,14 @@
             app:destination="@id/changeInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/categoriesFragment"
+        android:id="@+id/diseasesFragment"
         android:name="com.example.healt_app.roll_patient.DiseasesFragment"
         android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_patient_diseases" >
+        <argument
+            android:name="patient"
+            app:argType="com.example.healt_app.dataBase.User" />
+    </fragment>
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.healt_app.roll_patient.info.InfoFragment"
@@ -58,7 +62,11 @@
         android:id="@+id/doctorsFragment"
         android:name="com.example.healt_app.roll_patient.doctor_appointment.DoctorsFragment"
         android:label="fragment_doctors"
-        tools:layout="@layout/fragment_doctors" />
+        tools:layout="@layout/fragment_doctors" >
+        <argument
+            android:name="patient_id"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/medicineFragment"
         android:name="com.example.healt_app.roll_patient.medicine.MedicineFragment"
@@ -115,12 +123,12 @@
         <action
             android:id="@+id/action_homeDoctorFragment_to_patientsFragment"
             app:destination="@id/patientsFragment" />
-        <argument
-            android:name="doctor_id"
-            app:argType="integer" />
         <action
             android:id="@+id/action_homeDoctorFragment_to_doctorInfoFragment"
             app:destination="@id/doctorInfoFragment" />
+        <argument
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/changeInfoFragment"
@@ -167,33 +175,41 @@
         android:name="com.example.healt_app.roll_doctor.appointment.AppointsmentsFragment"
         android:label="fragment_appointsments"
         tools:layout="@layout/fragment_appointsments" >
-        <argument
-            android:name="doctor_id"
-            app:argType="integer" />
         <action
             android:id="@+id/action_appointsmentsFragment_to_choosingPatientFragment"
             app:destination="@id/choosingPatientFragment" />
+        <argument
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/createDoctorAppointmentFragment"
         android:name="com.example.healt_app.roll_doctor.appointment.CreateDoctorAppointmentFragment"
         android:label="fragment_create_doctor_appointment"
         tools:layout="@layout/fragment_create_doctor_appointment" >
+        <action
+            android:id="@+id/action_createDoctorAppointmentFragment_to_appointsmentsFragment"
+            app:destination="@id/appointsmentsFragment"
+            app:popUpTo="@id/appointsmentsFragment"
+            app:popUpToInclusive="true" />
         <argument
-            android:name="doctor_id"
-            app:argType="integer" />
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
+        <argument
+            android:name="patient"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/patientsFragment"
-        android:name="com.example.healt_app.roll_doctor.PatientsFragment"
+        android:name="com.example.healt_app.roll_doctor.disease.PatientsFragment"
         android:label="fragment_patients"
         tools:layout="@layout/fragment_patients" >
-        <argument
-            android:name="doctor_id"
-            app:argType="integer" />
         <action
             android:id="@+id/action_patientsFragment_to_diseasesFragment2"
             app:destination="@id/doctorDiseasesFragment" />
+        <argument
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/addDiseaseFragment"
@@ -201,11 +217,11 @@
         android:label="fragment_add_disease"
         tools:layout="@layout/fragment_add_disease" >
         <argument
-            android:name="doctor_id"
-            app:argType="integer" />
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
         <argument
-            android:name="patient_id"
-            app:argType="integer" />
+            android:name="patient"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/changeDiseaseFragment"
@@ -213,11 +229,8 @@
         android:label="fragment_change_disease"
         tools:layout="@layout/fragment_change_disease" >
         <argument
-            android:name="doctor_id"
-            app:argType="integer" />
-        <argument
-            android:name="patient_id"
-            app:argType="integer" />
+            android:name="disease"
+            app:argType="com.example.healt_app.dataBase.Disease" />
     </fragment>
     <fragment
         android:id="@+id/doctorDiseasesFragment"
@@ -231,11 +244,11 @@
             android:id="@+id/action_diseasesFragment2_to_addDiseaseFragment"
             app:destination="@id/addDiseaseFragment" />
         <argument
-            android:name="doctor_id"
-            app:argType="integer" />
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
         <argument
-            android:name="patient_id"
-            app:argType="integer" />
+            android:name="patient"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/doctorInfoFragment"
@@ -264,11 +277,6 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/changeDoctorAppointmentFragment"
-        android:name="com.example.healt_app.roll_doctor.appointment.ChangeDoctorAppointmentFragment"
-        android:label="fragment_change_doctor_appointment"
-        tools:layout="@layout/fragment_change_doctor_appointment" />
-    <fragment
         android:id="@+id/choosingPatientFragment"
         android:name="com.example.healt_app.roll_doctor.appointment.ChoosingPatientFragment"
         android:label="fragment_choosing_patient"
@@ -276,9 +284,9 @@
         <action
             android:id="@+id/action_choosingPatientFragment_to_createDoctorAppointmentFragment"
             app:destination="@id/createDoctorAppointmentFragment" />
-        <action
-            android:id="@+id/action_choosingPatientFragment_to_changeDoctorAppointmentFragment"
-            app:destination="@id/changeDoctorAppointmentFragment" />
+        <argument
+            android:name="doctor"
+            app:argType="com.example.healt_app.dataBase.User" />
     </fragment>
     <fragment
         android:id="@+id/doctorsRegistrationFragment"

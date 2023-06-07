@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.asLiveData
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.healt_app.R
-import com.example.healt_app.RecyclerViewsAdapters.AppointmentAdapter
+import com.example.healt_app.RecyclerViewAdapters.AppointmentAdapter
 import com.example.healt_app.dataBase.Appointment
+import com.example.healt_app.dataBase.MainDB
 import com.example.healt_app.databinding.FragmentAppointsmentsBinding
 
 
@@ -24,7 +26,7 @@ class AppointsmentsFragment : Fragment(), AppointmentAdapter.Listener {
         inflater: LayoutInflater , container: ViewGroup? ,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         _binding = FragmentAppointsmentsBinding.inflate(layoutInflater , container , false)
         return binding.root
 
@@ -32,27 +34,19 @@ class AppointsmentsFragment : Fragment(), AppointmentAdapter.Listener {
 
     override fun onViewCreated(view: View , savedInstanceState: Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        getListFromDB(appointmentsList)
-        appointmentAdapter.updateList(appointmentsList)
-        binding.appointmentRecyclerView.adapter = appointmentAdapter
+        val db = MainDB.getDb(requireContext())
         binding.appointmentRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-
-    }
-
-    private fun getListFromDB(arrayList: ArrayList<Appointment>) {
-        for (i in 1..5) {
-            val appointment = Appointment(
-                id = i ,
-                doctorName = "Doctor $i" ,
-                patientName = "Patient 0${i * 20}" ,
-                doctorId = i,
-                patientId = i*20,
-                time = "1$i:$i$i",
-                date = "Day $i",
-                post = "Medic $i Medic"
-            )
-            arrayList.add(appointment)
+        db.getDao().getAppointmentsByDoctorId(args.doctor.id!!).asLiveData().observe(requireActivity()){
+            appointmentsList.clear()
+            it.forEach{appointment->
+                appointmentsList.add(appointment)
+            }
+            appointmentAdapter.updateList(appointmentsList)
+            binding.appointmentRecyclerView.adapter = appointmentAdapter
+        }
+        binding.addCardView.setOnClickListener {
+            val action =  AppointsmentsFragmentDirections.actionAppointsmentsFragmentToChoosingPatientFragment(args.doctor)
+            Navigation.findNavController(requireView()).navigate(action)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.healt_app.RecyclerViewsAdapters
+package com.example.healt_app.RecyclerViewAdapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

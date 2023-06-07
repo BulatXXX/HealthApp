@@ -39,8 +39,8 @@
             android:layout_marginTop="@dimen/large_text_size"
             android:layout_marginBottom="@dimen/large_text_size"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/medicine_name"
+            <TextView
+                android:id="@id/patient_name"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,26 +48,42 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
                 android:textColor="@color/black"
-                android:hint="@string/medicine_name"/>
-            <EditText
-                android:id="@+id/freq"
+                android:hint="Пациент"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                app:dividerColor="@color/divider_color"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/date"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
+                android:layout_marginTop="@dimen/small_top_margin"
                 android:textColor="@color/black"
-                android:hint="Каждый день"/>
-            <EditText
+                android:hint="Date"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                app:dividerColor="@color/divider_color"
+                android:layout_height="wrap_content"/>
+            <TextView
                 android:id="@+id/time"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/large_text_size"
+                android:layout_marginTop="@dimen/small_top_margin"
                 android:textColor="@color/black"
-                android:hint="00:00"/>
+                android:hint="Time"/>
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                app:dividerColor="@color/divider_color"
+                android:layout_height="wrap_content"/>
 
 
 

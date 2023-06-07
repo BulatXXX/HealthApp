@@ -4,6 +4,7 @@ import androidx.room.*
 import androidx.room.Dao
 
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 
 @Dao
@@ -27,7 +28,6 @@ interface Dao {
     @Query("SELECT * FROM users WHERE id = :id")
     fun getUserByID(id : Int) : Flow<User>
 
-
     @Update
     fun updateUser(user: User)
 
@@ -39,6 +39,9 @@ interface Dao {
 
     @Query("SELECT * FROM users WHERE login = :login ")
     fun getUser(login: String): Flow<User>
+
+    @Query("SELECT * FROM users WHERE roll = :roll")
+    fun getPatients(roll: Boolean =false): Flow<List<User>>
 
     /**
      * Medicine
@@ -56,6 +59,39 @@ interface Dao {
 
     @Update
     fun updateMedicine(medicine: Medicine)
+
+    /**
+     * Appointment
+     */
+
+    @Insert
+    fun insertAppointment(appointment: Appointment)
+
+    @Delete
+    fun deleteAppointment(appointment: Appointment)
+
+    @Query("SELECT * FROM appointments WHERE doctor_id = :doctorId")
+    fun getAppointmentsByDoctorId(doctorId: Int): Flow<List<Appointment>>
+
+    @Query("SELECT * FROM appointments WHERE patient_id = :patientId")
+    fun getAppointmentsByPatientId(patientId: Int): Flow<List<Appointment>>
+
+
+    /**
+     * Diseases
+     */
+    @Insert
+    fun insertDisease(disease: Disease)
+
+    @Delete
+    fun deleteDisease(disease: Disease)
+
+    @Update
+    fun updateDisease(disease: Disease)
+
+    @Query("SELECT * FROM diseases WHERE patient_id = :patientId")
+    fun getDiseasesByPatientId(patientId: Int): Flow<List<Disease>>
+
 
 
 
