@@ -13,8 +13,7 @@
     <string name="obesity_1_dg">Ожирение 1 степени</string>
     <string name="obesity_2_dg">Ожирение 2 степени</string>
     <string name="obesity_3_dg">Ожирение 3 степени</string>
-    <string name="mass_index_text">Индекс массы тела — величина, позволяющая оценить степень соответствия массы человека и его роста и тем самым косвенно судить о том, является ли масса недостаточной, нормальной или избыточной. Важен при определении показаний для необходимости лечения.</string>
-    <string name="save">Сохранить</string>
+   <string name="save">Сохранить</string>
     <string name="medicine">Препараты</string>
     <string name="medicine_name">Название препарата</string>
     <string name="add">Добавить</string>
@@ -58,4 +57,6 @@
     <string name="adding">Добавление</string>
     <string name="diseases_name">Заболевание</string>
     <string name="delete_info">Удалить информацию?</string>
+    <string name="mass_index_text">Индекс массы тела — величина, позволяющая оценить степень соответствия массы человека и его роста и тем самым косвенно судить о том, является ли масса недостаточной, нормальной или избыточной. Важен при определении показаний для необходимости лечения.</string>
+
 </resources>
